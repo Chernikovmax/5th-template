@@ -1,6 +1,6 @@
 import '../styles/main.css';
 
-import './feature-products-slider.js';
+import './feature-products-gallery.js';
 
 let slideIndex = 0;
 
