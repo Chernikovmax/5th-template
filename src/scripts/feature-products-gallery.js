@@ -1,18 +1,22 @@
+const showFirstProduct = () =>showFeatureProduct(0);
 const first = document.querySelector('[data-type="1st-feature-product"]');
-first.addEventListener("click", () => showFeatureProduct(0));
+first.addEventListener("click", showFirstProduct);
 
+const showSecondProduct = () =>showFeatureProduct(1);
 const second = document.querySelector('[data-type="2nd-feature-product"]');
-second.addEventListener("click", () =>showFeatureProduct(1));
+second.addEventListener("click", showSecondProduct);
 
+const showThirdProduct = () =>showFeatureProduct(2);
 const third = document.querySelector('[data-type="3rd-feature-product"]');
-third.addEventListener("click", () =>showFeatureProduct(2));
+third.addEventListener("click", showThirdProduct);
 
-
+const showFourthProduct = () =>showFeatureProduct(3);
 const fourth = document.querySelector('[data-type="4th-feature-product"]');
-fourth.addEventListener("click", () =>showFeatureProduct(3));
+fourth.addEventListener("click", showFourthProduct);
 
+const showFifthProduct = () =>showFeatureProduct(4);
 const fifth = document.querySelector('[data-type="5th-feature-product"]');
-fifth.addEventListener("click", () =>showFeatureProduct(4));
+fifth.addEventListener("click", showFifthProduct);
 
 function showFeatureProduct(index) {
   const products = document.getElementsByClassName('feature-products__slide');
