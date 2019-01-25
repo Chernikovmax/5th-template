@@ -2,6 +2,8 @@ import '../styles/main.css';
 
 import './feature-products-gallery.js';
 
+import './feature-products-comments.js';
+
 let slideIndex = 0;
 
 showSlides();

@@ -1,3 +1,5 @@
+/* 2 part of Homepage */
+
 .info-container {
   display: flex;
   flex-direction: row;
@@ -17,10 +19,6 @@
   font-weight: 700;
   line-height: 55px;
   margin-bottom: 2%;
-}
-
-.common-info-description {
-
 }
 
 .common-info-learn {
@@ -69,7 +67,6 @@
 
 .feature-products {
   height: 850px;
-  border-bottom: 2px solid red;
 }
 
 .feature-products__title-field {
@@ -84,8 +81,8 @@
 }
 
 .regular-red-underscore {
-  margin-top: 2%;
-  margin-bottom: 8%;
+  margin-top: 1%;
+  margin-bottom: 3%;
   width: 132px;
   height: 3px;
   background-color: #ff2d2d;

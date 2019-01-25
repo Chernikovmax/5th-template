@@ -1,11 +1,11 @@
 @import "./homapage-body-main.css";
+@import "./feture-products-comments.css";
 
 body {
   min-width: 1250px;
   margin: 0;
   padding: 0;
   font-family: "Calibri";
-  font-size: 16px;
   line-height: 28px;
   font-weight: 400;
   color: #000;

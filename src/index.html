@@ -144,7 +144,7 @@
           Lorem ipsum dolor sit amet, consectetur adipis cing elit,sed do eius</br>
           -mod tempor incididunt ut labore et.
         </p>
-        <hr class="red-underscore">
+        <hr class="regular-red-underscore">
       </section>
       <ul class="feature-products__menu">
         <li data-type="1st-feature-product" class="feature-products__menu-item feature-products__menu-item--active">ALL</li>
@@ -178,9 +178,29 @@
           <img class="feature-products__slide-img" src="../src/imgs/presentation/9.jpeg" alt="">
           <img class="feature-products__slide-img" src="../src/imgs/presentation/10.jpeg" alt="">
         </li>
-
       </ul>
     </div>
+
+    <div class="feature-products__comments center-align">
+      <span class="regular-title">Comments</span>
+      <div class="red-underscore"></div>
+
+      <form name="comment-form" class="comment-input" style="">
+        <input required class="comment-input__name" type="text" name="commentator-name" maxlength="50" placeholder="your name">
+        <input required class="comment-input__email" type="text" name="commentator-email" maxlength="100" placeholder="your email (example@email.com)">
+        <section class="comment-input__wrapper">
+          <textarea required class="comment-input__textfield" name="comment-text" maxlength="500" placeholder="put your comment here" cols="40" rows="5"></textarea>
+          <button class="comment-input__send-btn" id="add-comment">add Comment</button>
+        </section>
+      </form>
+
+      <section class="comments">
+
+      </section>
+
+
+    </div>
+
   </main>
 </body>
 </html>
