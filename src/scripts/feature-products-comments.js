@@ -28,21 +28,20 @@ function renderComments() {
 
 // global.comments = comments.
 
-  comments.forEach(function(item) {
-    out += `
-      <section class="user-comment-wrapper" id="${item.postId}">
-        <section class="user-comment__data">
-          <img src="../src/icons/avatar.png" class="user-comment__avatar">
-          <section class="user-comment__name">${item.name} (${item.email})</section>
-          <section class="user-comment__date">${convertTime(item.time)}</section>
-        </section>
-        <p class="user-comment__text">
-          ${item.body}
-        </p>
-        <button class="reply-comment-btn">REPLY</button>
+comments.forEach(function(item) {
+  out += `
+    <section class="user-comment-wrapper" id="${item.postId}">
+      <section class="user-comment__data">
+        <img src="../src/icons/avatar.png" class="user-comment__avatar">
+        <section class="user-comment__name">${item.name} (${item.email})</section>
+        <section class="user-comment__date">${convertTime(item.time)}</section>
       </section>
-    `;
-  });
+      <p class="user-comment__text">
+        ${item.body}
+      </p>
+      <button class="reply-comment-btn">REPLY</button>
+    </section>
+  `;});
   commentsField.innerHTML = out;
 }
 
@@ -86,7 +85,7 @@ function showComment(obj) {
     console.log(out);
   commentsField.innerHTML = out;
 }
-// 
+//
 // function showReply(obj) {
 //
 // }
