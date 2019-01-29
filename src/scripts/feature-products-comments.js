@@ -24,34 +24,40 @@ fetch('https://jsonplaceholder.typicode.com/comments/4')
 
 function renderComments() {
   const commentsField = document.querySelector('.comments');
-  let out = '';
-
-// global.comments = comments.
 
 comments.forEach(function(item) {
-  out += `
-    <section class="user-comment-wrapper" id="${item.postId}">
+  let out = `
       <section class="user-comment__data">
         <img src="../src/icons/avatar.png" class="user-comment__avatar">
         <section class="user-comment__name">${item.name} (${item.email})</section>
-        <section class="user-comment__date">${convertTime(item.time)}</section>
+        <section class="user-comment__date">Jan/29/2019 20:42:09</section>
       </section>
       <p class="user-comment__text">
         ${item.body}
       </p>
       <button class="reply-comment-btn">REPLY</button>
-    </section>
-  `;});
-  commentsField.innerHTML = out;
+  `;
+  let comment = document.createElement('section');
+  comment.setAttribute('class', 'user-comment-wrapper');
+  // comment.setAttribute('id', `${item.postId}`);
+  comment.innerHTML = out;
+  commentsField.appendChild(comment);
+});
 }
 
-renderComments();
+setTimeout(renderComments, 1000);
 
 addCommentBtn.addEventListener('click', () => {
-  event.preventDefault();
+  // event.preventDefault();
   const commentatorName = document.querySelector('[name="commentator-name"]');
   const commentatorEmail = document.querySelector('[name="commentator-email"]');
   const commentatorText = document.querySelector('[name="comment-text"]');
+
+    if(commentatorName.value == "" || commentatorEmail.value == "" || commentatorText.value == "") {
+      return;
+    }
+
+    if(validateEmail(commentatorEmail.value) !== true) return;
 
   let comment = {
     name: commentatorName.value,
@@ -70,7 +76,6 @@ addCommentBtn.addEventListener('click', () => {
 function showComment(obj) {
   const commentsField = document.querySelector('.comments');
   let out = `
-      <section class="user-comment-wrapper" id="${obj.postId}">
         <section class="user-comment__data">
           <img src="../src/icons/avatar.png" class="user-comment__avatar">
           <section class="user-comment__name">${obj.name} (${obj.email})</section>
@@ -80,12 +85,15 @@ function showComment(obj) {
           ${obj.body}
         </p>
         <button class="reply-comment-btn">REPLY</button>
-      </section>
     `;
-    console.log(out);
-  commentsField.innerHTML = out;
+  let comment = document.createElement('section');
+  comment.setAttribute('class', 'user-comment-wrapper');
+  comment.setAttribute('id', `${obj.postId}`);
+  comment.innerHTML = out;
+
+  commentsField.appendChild(comment);
 }
-//
+
 // function showReply(obj) {
 //
 // }
@@ -107,4 +115,9 @@ function addZeros(num) {
   if(String(num).length < 2) {
     return `0${num}`;
   } else return num;
+}
+
+function validateEmail(email) {
+  var required = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return required.test(email);
 }

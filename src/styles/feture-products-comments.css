@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   margin-left: 0;
-  height: 800px;
+  height: auto;
 }
 
 .red-underscore {
@@ -47,10 +47,11 @@
 }
 
 .comment-input__textfield {
+  outline: none;
+  border: 1px solid #ff2d2d;
   border-right: none;
-  border-color: #ff2d2d;
   border-radius: 5px 0 0 5px;
-  height: 80px;
+  height: 82px;
   width: 89%;
   font-size: 18px;
   padding-left: 20px;

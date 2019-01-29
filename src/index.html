@@ -187,10 +187,10 @@
 
       <form name="comment-form" class="comment-input" style="">
         <input required class="comment-input__name" type="text" name="commentator-name" maxlength="50" placeholder="your name">
-        <input required class="comment-input__email" type="text" name="commentator-email" maxlength="100" placeholder="your email (example@email.com)">
+        <input required class="comment-input__email" type="email" name="commentator-email" maxlength="100" placeholder="your email (example@email.com)">
         <section class="comment-input__wrapper">
-          <textarea required class="comment-input__textfield" name="comment-text" maxlength="500" placeholder="put your comment here" cols="40" rows="5"></textarea>
-          <button class="comment-input__send-btn" id="add-comment">add Comment</button>
+          <input required type="text" class="comment-input__textfield" name="comment-text" maxlength="500" placeholder="put your comment here" cols="40" rows="5"></input>
+          <button type="submit" class="comment-input__send-btn" id="add-comment">add Comment</button>
         </section>
       </form>
 
