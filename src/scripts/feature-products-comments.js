@@ -1,5 +1,4 @@
 const comments = [];
-let commentId = 0;
 const addCommentBtn = document.getElementById('add-comment');
 
 fetch('https://jsonplaceholder.typicode.com/comments/1')
@@ -18,14 +17,16 @@ fetch('https://jsonplaceholder.typicode.com/comments/4')
   .then(response => response.json())
   .then(json => comments.push(json));
 
-fetch('https://jsonplaceholder.typicode.com/comments/4')
+fetch('https://jsonplaceholder.typicode.com/comments/5')
   .then(response => response.json())
   .then(json => comments.push(json));
+
+let commentId = comments.length;
 
 function renderComments() {
   const commentsField = document.querySelector('.comments');
 
-comments.forEach(function(item) {
+comments.forEach((item) => {
   let out = `
       <section class="user-comment__data">
         <img src="../src/icons/avatar.png" class="user-comment__avatar">
@@ -35,7 +36,7 @@ comments.forEach(function(item) {
       <p class="user-comment__text">
         ${item.body}
       </p>
-      <button class="reply-comment-btn">REPLY</button>
+      <button class="reply-comment-btn" id="${item.id}" type="submit">REPLY</button>
   `;
   let comment = document.createElement('section');
   comment.setAttribute('class', 'user-comment-wrapper');
@@ -64,16 +65,16 @@ addCommentBtn.addEventListener('click', () => {
     email: commentatorEmail.value,
     time: Math.floor(Date.now()/1000),
     body: commentatorText.value,
-    postId: commentId++
+    id: comments.length +1
   };
 
   document.querySelector('[name="comment-form"]').reset();
 
   comments.push(comment);
-  showComment(comment);
+  printComment(comment);
 });
 
-function showComment(obj) {
+function printComment(obj) {
   const commentsField = document.querySelector('.comments');
   let out = `
         <section class="user-comment__data">
@@ -84,19 +85,16 @@ function showComment(obj) {
         <p class="user-comment__text">
           ${obj.body}
         </p>
-        <button class="reply-comment-btn">REPLY</button>
+        <button class="reply-comment-btn" id="${obj.id}" type="submit">REPLY</button>
     `;
   let comment = document.createElement('section');
   comment.setAttribute('class', 'user-comment-wrapper');
-  comment.setAttribute('id', `${obj.postId}`);
   comment.innerHTML = out;
 
   commentsField.appendChild(comment);
 }
 
-// function showReply(obj) {
-//
-// }
+
 
 function convertTime(secs) {
   const d = new Date(secs * 1000);
