@@ -19,7 +19,7 @@ function showSlides() {
   slides[slideIndex].classList.add('slide--active');
   dots[slideIndex].classList.add('slide__dot-switcher--active');
   slideIndex++;
-  if (slideIndex > slides.length-1) {slideIndex = 0};
+  if (slideIndex > slides.length-1) {slideIndex = 0;}
   setTimeout(showSlides, 3000);
 }
 

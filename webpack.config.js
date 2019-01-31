@@ -49,7 +49,7 @@ module.exports = {
     MiniCssExtractPluginConfig,
   ],
   devServer: {
-  compress: true,
-  port: 5000,
+    compress: true,
+    port: 5000,
   },
 };

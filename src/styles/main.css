@@ -44,11 +44,10 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  position: relative;
-  top: 29px;
   height: 89px;
   background-color: #000000;
   opacity: 0.8;
+  margin-top: 0;
   margin-bottom: 111px;
 }
 
