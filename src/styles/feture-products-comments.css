@@ -7,15 +7,6 @@
   height: auto;
 }
 
-.red-underscore {
-  margin-top: -1rem;
-  margin-bottom: 2rem;
-  width: 132px;
-  height: 2px;
-  background-color: #ff2d2d;
-  border: none;
-}
-
 .comment-input {
   display: flex;
   flex-direction:column;

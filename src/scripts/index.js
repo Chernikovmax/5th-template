@@ -22,3 +22,7 @@ function showSlides() {
   if (slideIndex > slides.length-1) {slideIndex = 0};
   setTimeout(showSlides, 3000);
 }
+
+function showCertainSlide(num) {
+
+}

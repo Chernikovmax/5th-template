@@ -1,6 +1,9 @@
 @import "./homapage-body-main.css";
 @import "./feture-products-comments.css";
+@import "./contact-info.css";
+@import "./footer-field.css";
 
+html,
 body {
   min-width: 1250px;
   margin: 0;
