@@ -1,0 +1,51 @@
+/* User comment's styles */
+
+.user-comment-wrapper {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ff2d2d;
+}
+
+.subcomment {
+  width: 95%;
+  margin-left: 5%;
+}
+
+.user-comment__data {
+  display: flex;
+  justify-content:flex-start;
+  align-items: center;
+}
+
+.user-comment__name {
+  font-weight: bold;
+  margin-right: 30px;
+  margin-left: 10px;
+}
+
+.user-comment__date {
+  font-style: italic;
+  opacity: 0.6;
+}
+
+.user-comment__text {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  opacity: 0.9;
+}
+
+.reply-comment-btn {
+  text-align: center;
+  font-weight: bold;
+  width: 60px;
+  border: none;
+  color: rgb(3, 136, 212);
+  background-color: transparent;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+.reply-comment-btn:hover {
+  color: rgb(6, 163, 252);
+}

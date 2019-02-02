@@ -1,5 +1,7 @@
 @import "./homapage-body-main.css";
-@import "./feture-products-comments.css";
+@import "./comments-form.css";
+@import "./comments-themselves.css";
+@import "./comments-navigation.css";
 @import "./contact-info.css";
 @import "./footer-field.css";
 

@@ -2,7 +2,7 @@ import '../styles/main.css';
 
 import './feature-products-gallery.js';
 
-import './feature-products-comments.js';
+import './comments.js';
 
 const slides = document.getElementsByClassName('slide');
 const dots = document.getElementsByClassName('slide-switches__dot');
