@@ -7,80 +7,87 @@
   <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
+
   <header class="header-container">
-    <ul class="header-container__menu center-align">
-      <li class="header-container__menu-item"><a href="#">HOME</a></li>
-      <li class="header-container__menu-item"><a href="#">POSTS</a></li>
-      <li class="header-container__menu-item"><a href="#">COMMENTS</a></li>
-      <li class="header-container__menu-item"><a href="#">CONTACTS</a></li>
+    <ul class="header-menu">
+      <li class="header-menu__item header-menu__item--active"><a href="#">HOME</a></li>
+      <li class="header-menu__item"><a href="#">POSTS</a></li>
+      <li class="header-menu__item"><a href="#">COMMENTS</a></li>
+      <li class="header-menu__item"><a href="#">CONTACTS</a></li>
     </ul>
-    <section class="header-container__slideshow-container center-align">
-
-      <section class="slide">
-        <section class="slide-body">
-          <span class="silde-title">OUR STRONG ORGANISATION</span>
-          <p class="slide-description">
-            Lorem ipsum dolor sit amet, consectetur adipis cing elit,
-            sed do eiusmod tempor incididunt  ut labore et. ectetur
-            adig ipis cing elit, sed do eiusmod tempor incididunt.
-          </p>
-        </section>
-        <img src="../src/imgs/car-1.jpg" alt="Red classic car" class="slide-image">
-      </section>
-
-      <section class="slide">
-        <section class="slide-body">
-          <span class="silde-title">OUR STRONG ORGANISATION</span>
-          <p class="slide-description">
-            Ut labore et. ectetur adig ipis cing elit, sed do eiusmod.
-            Lorem ipsum dolor sit amet, consectetur adipis cing elit,
-            sed do eiusmod tempor incididunt  ut labore et. ectetur
-            adig ipis cing elit, sed do eiusmod tempor incididunt.
-          </p>
-        </section>
-        <img src="../src/imgs/car-2.jpg" alt="Red classic Mercedes" class="slide-image">
-      </section>
-
-      <section class="slide">
-        <section class="slide-body">
-          <span class="silde-title">OUR STRONG ORGANISATION</span>
-          <p class="slide-description">
-            Do eiusmod tempor incididunt  ut labore et. ectetur
-            adig ipis cing elit, sed do eiusmod tempor incididunt.
-            Lorem ipsum dolor sit amet, consectetur adipis cing elit,
-            sed do eiusmod tempor incididunt  ut labore et. ectetur
-            adig ipis cing elit, sed do eiusmod tempor incididunt.
-          </p>
-        </section>
-        <img src="../src/imgs/car-3.jpg" alt="Bronze classic Mustang" class="slide-image">
-      </section>
-
-      <section class="slide">
-        <section class="slide-body">
-          <span class="silde-title">OUR STRONG ORGANISATION</span>
-          <p class="slide-description">
-            Lorem ipsum dolor sit amet, consectetur adipis cing elit,
-            sed do eiusmod tempor incididunt  ut labore et. ectetur
-            adig ipis cing elit, sed do eiusmod tempor incididunt.
-          </p>
-        </section>
-        <img src="../src/imgs/car-4.jpg" alt="Cclassic car" class="slide-image">
-      </section>
-
-      <a href="#" class="slide__contact-btn">Contact Us</a>
-
-      <section class="slide__toggle-bar">
-        <button class="slide__dot-switcher"></button>
-        <button class="slide__dot-switcher"></button>
-        <button class="slide__dot-switcher"></button>
-        <button class="slide__dot-switcher"></button>
-      </section>
-
-    </section>
   </header>
 
-  <main class="center-align">
-    <div class="info-container">
+  <main>
+    <div class="centered-wrapper">
+      <section class="slides">
+
+        <section class="slide">
+          <section class="slide__body">
+            <span class="slide__body-title">OUR STRONG ORGANISATION</span>
+            <p class="slide__body-description">
+              Lorem ipsum dolor sit amet, consectetur adipis cing elit,
+              sed do eiusmod tempor incididunt  ut labore et. ectetur
+              adig ipis cing elit, sed do eiusmod tempor incididunt.
+            </p>
+          </section>
+          <img src="../src/imgs/car-1.jpg" alt="Red classic car" class="slide-image">
+        </section>
+
+        <section class="slide">
+          <section class="slide__body">
+            <span class="slide__body-title">OUR STRONG ORGANISATION</span>
+            <p class="slide__body-description">
+              Ut labore et. ectetur adig ipis cing elit, sed do eiusmod.
+              Lorem ipsum dolor sit amet, consectetur adipis cing elit,
+              sed do eiusmod tempor incididunt  ut labore et. ectetur
+              adig ipis cing elit, sed do eiusmod tempor incididunt.
+            </p>
+          </section>
+          <img src="../src/imgs/car-2.jpg" alt="Red classic Mercedes" class="slide-image">
+        </section>
+
+        <section class="slide">
+          <section class="slide__body">
+            <span class="slide__body-title">OUR STRONG ORGANISATION</span>
+            <p class="slide__body-description">
+              Do eiusmod tempor incididunt  ut labore et. ectetur
+              adig ipis cing elit, sed do eiusmod tempor incididunt.
+              Lorem ipsum dolor sit amet, consectetur adipis cing elit,
+              sed do eiusmod tempor incididunt  ut labore et. ectetur
+              adig ipis cing elit, sed do eiusmod tempor incididunt.
+            </p>
+          </section>
+          <img src="../src/imgs/car-3.jpg" alt="Bronze classic Mustang" class="slide-image">
+        </section>
+
+        <section class="slide">
+          <section class="slide__body">
+            <span class="slide__body-title">OUR STRONG ORGANISATION</span>
+            <p class="slide__body-description">
+              Lorem ipsum dolor sit amet, consectetur adipis cing elit,
+              sed do eiusmod tempor incididunt  ut labore et. ectetur
+              adig ipis cing elit, sed do eiusmod tempor incididunt.
+            </p>
+          </section>
+          <img src="../src/imgs/car-4.jpg" alt="Cclassic car" class="slide-image">
+        </section>
+
+        <a href="#" class="slide__contact-btn">Contact Us</a>
+
+        <section class="slide-switches">
+          <button class="slide-switches__playback" onclick="playbackSwitcher()">&#10074;&#10074;</button>
+          <button class="slide-switches__prev" onclick="setPrevSlide()"><</button>
+          <button class="slide-switches__dot" onclick="setSlide(0)"></button>
+          <button class="slide-switches__dot" onclick="setSlide(1)"></button>
+          <button class="slide-switches__dot" onclick="setSlide(2)"></button>
+          <button class="slide-switches__dot" onclick="setSlide(3)"></button>
+          <button class="slide-switches__next" onclick="setNextSlide()">></button>
+        </section>
+
+      </section>
+    </div>
+
+    <div class="info-container center-align">
 
       <section class="common-info">
         <span class="regular-title">
@@ -215,13 +222,13 @@
 
         </form>
       </section>
-      <section class="contacts__info">
+      <address class="contacts__info">
         <span class="contacts__info-title">CONTACT INFO</span>
         <span class="contacts__info-address">Jalalabad 24 / A, Ambaarkhana, Sylhet,
 Bangladesh</span>
         <a href="mailto:redwan@deviserweb.com" class="contacts__info-email">redwan@deviserweb.com</a>
         <a href="tel:(+88)017-617-46373" class="contacts__info-telr">(+88) 017 617 46373</a>
-      </section>
+      </address>
     </div>
 
   </main>
