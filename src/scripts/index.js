@@ -77,7 +77,7 @@ global.playbackSwitcher = playbackSwitcher;
 
 function playSlideshow() {
   play = true;
-  playbackBtn.innerHTML = '&#10074;&#10074;';
+  playbackBtn.innerHTML = '&#9612;&#9612;';
   slideInterval = setInterval(nextSlide, 2500);
 }
 
