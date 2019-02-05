@@ -33,7 +33,7 @@ import {convertTime, validateEmail} from './utils';
   //   commentsField.insertBefore(commentElement, commentsField.firstChild);
   // }
 
-  const renderComments = (comments1) => comments1.forEach((item) => {
+  const renderComments = (commentsList) => commentsList.forEach((item) => {
     let out = `
       <section class="user-comment__data">
         <img src="../src/icons/avatar.png" class="user-comment__avatar">
@@ -50,6 +50,29 @@ import {convertTime, validateEmail} from './utils';
     comment.innerHTML = out;
     commentsField.insertBefore(comment, commentsField.firstChild);
   });
+
+// ----------------------Button wich activates comment field ---------------------
+  let commentsRendered = false;
+  const showCommentsBtn = document.querySelector('.show-comments-btn');
+
+  function activateComments() {
+    if (commentsRendered === false) {
+      commentsRendered = true;
+      showCommentsBtn.innerText = 'Hide comments';
+    } else {
+      commentsRendered = false;
+      showCommentsBtn.innerText = 'Show comments';
+      }
+    document.querySelector('.comments-field').classList.toggle('comments-field--active');
+    renderCommentBundleBtns();
+    return renderComments(comments.slice((comments.length >= 15) ? comments.length-15 : 0));
+  }
+
+  showCommentsBtn.addEventListener('click', activateComments);
+
+// --------------------------------------------------------------------------------
+
+// ----------------------Button wich add a new comment and render it immediatly------------------------------
 
   const addCommentButton = () => {
     const commentatorName = document.querySelector('[name="commentator-name"]');
@@ -80,12 +103,15 @@ import {convertTime, validateEmail} from './utils';
 
   addCommentBtn.addEventListener('click', addCommentButton);
 
+// ------------------------------------------------------------------------------------
+
   fetchComments().then((data) => {
     comments = data;
     global.comments = comments;
-    renderCommentBundleBtns();
   });
-
+// .then(alert(comments.length))
+  // alert(comments.lenght);
+  // renderCommentBundleBtns();
 
   function renderCommentBundleBtns() {
     clearComments();
@@ -95,10 +121,9 @@ import {convertTime, validateEmail} from './utils';
     createBtn("comments-nav__btn", "comments-nav__prev", "<", topCommentsNav);
     createBtn("comments-nav__btn", "comments-nav__prev", "<", bottomCommentsNav);
 
-// !!! ATTENTION !!! THIS CODE WILL NEED TO BE CORRECTED LATER !!! TRANSMITTED ID SET AS "I" !!!
     for (let i = 0; i < sortedCommentsQuantity; i++) {
-      createBtn("comments-nav__btn", `comments-top${i}`, i+1, topCommentsNav, `renderCertainComments(${i+1})`);
-      createBtn("comments-nav__btn", `comments-bottom${i}`, i+1, bottomCommentsNav, `renderCertainComments(${i+1})`);
+      createBtn("comments-nav__btn", `comments-top${i}`, i+1, topCommentsNav, `renderCertainComments(${i})`);
+      createBtn("comments-nav__btn", `comments-bottom${i}`, i+1, bottomCommentsNav, `renderCertainComments(${i})`);
     }
 
     createBtn("comments-nav__btn", "comments-nav__next", ">", topCommentsNav);
@@ -106,10 +131,12 @@ import {convertTime, validateEmail} from './utils';
   }
 
   function renderCertainComments(index) {
-    let begin = comments.length - ((index) * 15);
-    let end = begin + 15;
+    let end = (comments.length) - ((index) * 15);
+    let begin = end - 15;
+    if (begin < 0) {begin = 0;}
+    clearComments();
+    renderCommentBundleBtns();
     renderComments(comments.slice(begin, end));
-
   }
   global.renderCertainComments = renderCertainComments;
 
@@ -128,8 +155,8 @@ import {convertTime, validateEmail} from './utils';
   }
 
   function clearComments() {
-    commentsField.innerHTML = '';
     topCommentsNav.innerHTML = '';
+    commentsField.innerHTML = '';
     bottomCommentsNav.innerHTML = '';
   }
 })();
