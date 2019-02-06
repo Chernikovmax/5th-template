@@ -7,7 +7,7 @@ import {convertTime, validateEmail} from './utils';
 
   const topCommentsNav = document.querySelector('#top-comments-nav');
   const bottomCommentsNav = document.querySelector('#bottom-comments-nav');
-  let commentsBundleIndex;
+  let commentBundleIndex;
 
   const fetchComments = () => {
     return fetch('https://jsonplaceholder.typicode.com/comments')
@@ -65,6 +65,7 @@ import {convertTime, validateEmail} from './utils';
       showCommentsBtn.innerText = 'Show comments';
       }
     document.querySelector('.comments-field').classList.toggle('comments-field--active');
+    commentBundleIndex = 0;
     renderCommentBundleBtns();
     document.querySelector(`#comments-bottom0`).classList.add('comments-nav__btn--active');
     document.querySelector(`#comments-top0`).classList.add('comments-nav__btn--active');
@@ -113,20 +114,20 @@ import {convertTime, validateEmail} from './utils';
   });
 
   function renderCommentBundleBtns() {
-    clearComments();
+    clearCommentBundleBtns();
 
     const sortedCommentsQuantity = Math.ceil(comments.length/15);
 
-    createBtn("comments-nav__btn", "comments-nav__prev", "<", topCommentsNav);
-    createBtn("comments-nav__btn", "comments-nav__prev", "<", bottomCommentsNav);
+    createBtn("comments-nav__btn", "comments-nav__prev", "<", topCommentsNav, `prevCommentBundle(${commentBundleIndex - 1})`);
+    createBtn("comments-nav__btn", "comments-nav__prev", "<", bottomCommentsNav, `prevCommentBundle(${commentBundleIndex - 1})`);
 
     for (let i = 0; i < sortedCommentsQuantity; i++) {
       createBtn("comments-nav__btn", `comments-top${i}`, i+1, topCommentsNav, `renderCertainComments(${i})`);
       createBtn("comments-nav__btn", `comments-bottom${i}`, i+1, bottomCommentsNav, `renderCertainComments(${i})`);
     }
 
-    createBtn("comments-nav__btn", "comments-nav__next", ">", topCommentsNav);
-    createBtn("comments-nav__btn", "comments-nav__next", ">", bottomCommentsNav);
+    createBtn("comments-nav__btn", "comments-nav__next", ">", topCommentsNav, `nextCommentBundle(${commentBundleIndex + 1})`);
+    createBtn("comments-nav__btn", "comments-nav__next", ">", bottomCommentsNav, `nextCommentBundle(${commentBundleIndex + 1})`);
   }
 
   function renderCertainComments(index) {
@@ -134,13 +135,13 @@ import {convertTime, validateEmail} from './utils';
     let begin = end - 15;
     if (begin < 0) {begin = 0;}
     clearComments();
-    renderCommentBundleBtns();
-    if (commentsBundleIndex !== undefined) {
-      document.querySelector(`#comments-bottom${commentsBundleIndex}`).classList.remove('comments-nav__btn--active');
-      document.querySelector(`#comments-top${commentsBundleIndex}`).classList.remove('comments-nav__btn--active');
+    if (commentBundleIndex !== undefined) {
+      document.querySelector(`#comments-bottom${commentBundleIndex}`).classList.remove('comments-nav__btn--active');
+      document.querySelector(`#comments-top${commentBundleIndex}`).classList.remove('comments-nav__btn--active');
     }
-    commentsBundleIndex = index;
-    global.commentsBundleIndex = commentsBundleIndex;
+    commentBundleIndex = index;
+    global.commentBundleIndex = commentBundleIndex;
+    renderCommentBundleBtns();
     document.querySelector(`#comments-bottom${index}`).classList.add('comments-nav__btn--active');
     document.querySelector(`#comments-top${index}`).classList.add('comments-nav__btn--active');
     renderComments(comments.slice(begin, end));
@@ -162,10 +163,29 @@ import {convertTime, validateEmail} from './utils';
   }
 
   function clearComments() {
-    topCommentsNav.innerHTML = '';
     commentsField.innerHTML = '';
+  }
+
+  function clearCommentBundleBtns() {
+    topCommentsNav.innerHTML = '';
     bottomCommentsNav.innerHTML = '';
   }
+
+  function prevCommentBundle(index) {
+    if (index < 0) {
+      index = Math.floor(comments.length/15);
+    }
+    renderCertainComments(index);
+  }
+  global.prevCommentBundle = prevCommentBundle;
+
+  function nextCommentBundle(index) {
+    if (index > Math.floor(comments.length/15)) {
+      index = 0;
+    }
+    renderCertainComments(index);
+  }
+  global.nextCommentBundle = nextCommentBundle;
 })();
 
 /*
