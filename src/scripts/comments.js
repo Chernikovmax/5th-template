@@ -7,6 +7,7 @@ import {convertTime, validateEmail} from './utils';
 
   const topCommentsNav = document.querySelector('#top-comments-nav');
   const bottomCommentsNav = document.querySelector('#bottom-comments-nav');
+  let commentsBundleIndex;
 
   const fetchComments = () => {
     return fetch('https://jsonplaceholder.typicode.com/comments')
@@ -65,6 +66,8 @@ import {convertTime, validateEmail} from './utils';
       }
     document.querySelector('.comments-field').classList.toggle('comments-field--active');
     renderCommentBundleBtns();
+    document.querySelector(`#comments-bottom0`).classList.add('comments-nav__btn--active');
+    document.querySelector(`#comments-top0`).classList.add('comments-nav__btn--active');
     return renderComments(comments.slice((comments.length >= 15) ? comments.length-15 : 0));
   }
 
@@ -96,7 +99,6 @@ import {convertTime, validateEmail} from './utils';
 
     document.querySelector('[name="comment-form"]').reset();
 
-    // comments = [...comments, comment];
     renderCommentBundleBtns();
     renderComments(comments.slice((comments.length >= 15) ? comments.length-15 : 0));
   };
@@ -109,9 +111,6 @@ import {convertTime, validateEmail} from './utils';
     comments = data;
     global.comments = comments;
   });
-// .then(alert(comments.length))
-  // alert(comments.lenght);
-  // renderCommentBundleBtns();
 
   function renderCommentBundleBtns() {
     clearComments();
@@ -136,6 +135,14 @@ import {convertTime, validateEmail} from './utils';
     if (begin < 0) {begin = 0;}
     clearComments();
     renderCommentBundleBtns();
+    if (commentsBundleIndex !== undefined) {
+      document.querySelector(`#comments-bottom${commentsBundleIndex}`).classList.remove('comments-nav__btn--active');
+      document.querySelector(`#comments-top${commentsBundleIndex}`).classList.remove('comments-nav__btn--active');
+    }
+    commentsBundleIndex = index;
+    global.commentsBundleIndex = commentsBundleIndex;
+    document.querySelector(`#comments-bottom${index}`).classList.add('comments-nav__btn--active');
+    document.querySelector(`#comments-top${index}`).classList.add('comments-nav__btn--active');
     renderComments(comments.slice(begin, end));
   }
   global.renderCertainComments = renderCertainComments;
