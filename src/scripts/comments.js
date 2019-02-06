@@ -14,28 +14,9 @@ import {convertTime, validateEmail} from './utils';
       .then(response => response.json());
   };
 
-  // const renderComment = (comment) => {
-  //   const commentsField = document.querySelector('.comments');
-  //   let out = `
-  //       <section class="user-comment__data">
-  //         <img src="../src/icons/avatar.png" class="user-comment__avatar">
-  //         <section class="user-comment__name">${comment.name} (${comment.email})</section>
-  //         <section class="user-comment__date">${convertTime(comment.time)}</section>
-  //       </section>
-  //       <p class="user-comment__text">
-  //         ${comment.body}
-  //       </p>
-  //       <button class="reply-comment-btn" id="${comment.id}" type="submit">REPLY</button>
-  //   `;
-  //   let commentElement = document.createElement('section');
-  //   commentElement.setAttribute('class', 'user-comment-wrapper');
-  //   commentElement.innerHTML = out;
-  //
-  //   commentsField.insertBefore(commentElement, commentsField.firstChild);
-  // }
-
   const renderComments = (commentsList) => commentsList.forEach((item) => {
     let out = `
+      <a name="anchor-${item.id}"></a>
       <section class="user-comment__data">
         <img src="../src/icons/avatar.png" class="user-comment__avatar">
         <section class="user-comment__name">${item.name} (${item.email})</section>
@@ -44,7 +25,12 @@ import {convertTime, validateEmail} from './utils';
       <p class="user-comment__text">
         ${item.body}
       </p>
-      <button class="reply-comment-btn" id="${item.id}" type="submit">REPLY</button>
+      <section class="wrapper-comment-interactions">
+        <button class="reply-comment-btn" id="${item.id}" type="submit" oncklick="replyThisComment(${item.id}, )">REPLY</button>
+        <button class="comment-replies-btn" id="${item.id}" type="submit" oncklick="replyThisComment(${item.id}, anchor-${item.id})">
+        Show replied comments (${(item.subCommentsQuantity !== undefined) ? item.subCommentsQuantity : 0})
+        </button>
+      </section>
   `;
     let comment = document.createElement('section');
     comment.setAttribute('class', 'user-comment-wrapper');
@@ -94,7 +80,8 @@ import {convertTime, validateEmail} from './utils';
       email: commentatorEmail.value,
       time: Math.floor(Date.now() / 1000),
       body: commentatorText.value,
-      id: comments.length + 1
+      id: comments.length + 1,
+      subCommentsQuantity: 0
     };
     comments.push(comment);
 
@@ -186,14 +173,34 @@ import {convertTime, validateEmail} from './utils';
     renderCertainComments(index);
   }
   global.nextCommentBundle = nextCommentBundle;
-})();
 
-/*
-const commentList = {
-  comments: [{
-    title: 'sdf',
-    id: 'asd',
-    subComments: [{}]
-  }],
-}
-*/
+
+/*----------------------------------------------------------------------------------------Subcomments-----------------------------------------------------------------------*/
+  const subComments = [];
+
+
+  function replyThisComment(commentId, anchor) {
+
+  }
+
+  // const renderSubComments = (comment) => {
+  //   const commentsField = document.querySelector('.comments');
+  //   let out = `
+  //       <section class="user-comment__data">
+  //         <img src="../src/icons/avatar.png" class="user-comment__avatar">
+  //         <section class="user-comment__name">${comment.name} (${comment.email})</section>
+  //         <section class="user-comment__date">${convertTime(comment.time)}</section>
+  //       </section>
+  //       <p class="user-comment__text">
+  //         ${comment.body}
+  //       </p>
+  //       <button class="reply-comment-btn" id="${comment.id}" type="submit">REPLY</button>
+  //   `;
+  //   let commentElement = document.createElement('section');
+  //   commentElement.setAttribute('class', 'user-comment-wrapper');
+  //   commentElement.innerHTML = out;
+  //
+  //   commentsField.insertBefore(commentElement, commentsField.firstChild);
+  // }
+
+})();

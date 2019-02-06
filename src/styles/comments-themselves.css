@@ -36,10 +36,15 @@
   opacity: 0.9;
 }
 
+.wrapper-comment-interactions {
+  display: inline-flex;
+  justify-content: space-between;
+}
+
 .reply-comment-btn {
   text-align: center;
   font-weight: bold;
-  width: 60px;
+  width: 4rem;
   border: none;
   color: rgb(3, 136, 212);
   background-color: transparent;
@@ -47,5 +52,19 @@
   margin-bottom: 5px;
 }
 .reply-comment-btn:hover {
+  color: rgb(6, 163, 252);
+}
+
+.comment-replies-btn {
+  text-align: center;
+  font-weight: bold;
+  width: 15.5rem;
+  border: none;
+  color: rgb(117, 171, 201);
+  background-color: transparent;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+.comment-replies-btn:hover {
   color: rgb(6, 163, 252);
 }

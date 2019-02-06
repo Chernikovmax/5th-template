@@ -7,7 +7,7 @@ export function convertTime(secs) {
   const hour = d.getHours();
   const min = d.getMinutes();
   const sec = d.getSeconds();
-  return `${month}/${date}/${year} ${normalizeTime(hour)}:${normalizeTime(min)}:${normalizeTime(sec)}`;
+  return (secs !== undefined) ? `${month}/${date}/${year} ${normalizeTime(hour)}:${normalizeTime(min)}:${normalizeTime(sec)}` : 'Apr/7/1993 13:10:44';
 }
 
 export function normalizeTime(time) {
