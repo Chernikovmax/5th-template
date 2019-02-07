@@ -9,6 +9,11 @@ import {convertTime, validateEmail} from './utils';
   const bottomCommentsNav = document.querySelector('#bottom-comments-nav');
   let commentBundleIndex;
 
+  // Constants below are for creating new comments and replies for it.
+  const commentatorName = document.querySelector('[name="commentator-name"]');
+  const commentatorEmail = document.querySelector('[name="commentator-email"]');
+  const commentatorText = document.querySelector('[name="comment-text"]');
+
   const fetchComments = () => {
     return fetch('https://jsonplaceholder.typicode.com/comments')
       .then(response => response.json());
@@ -27,8 +32,8 @@ import {convertTime, validateEmail} from './utils';
       </p>
       <section class="wrapper-comment-interactions">
         <button class="reply-comment-btn" id="${item.id}" type="submit" oncklick="replyThisComment(${item.id}, )">REPLY</button>
-        <button class="comment-replies-btn" id="${item.id}" type="submit" oncklick="replyThisComment(${item.id}, anchor-${item.id})">
-        Show replied comments (${(item.subCommentsQuantity !== undefined) ? item.subCommentsQuantity : 0})
+        <button class="comment-replies-btn" id="${item.id}" type="submit" oncklick="replyThisComment(${item.name}, ${item.id}, anchor-${item.id})">
+          <a class="anchor-subcomment" href="#anchor-subcomment">Show replied comments (${(item.subCommentsQuantity !== undefined) ? item.subCommentsQuantity : 0})</a>
         </button>
       </section>
   `;
@@ -65,9 +70,6 @@ import {convertTime, validateEmail} from './utils';
 // ----------------------Button wich add a new comment and render it immediatly------------------------------
 
   const addCommentButton = () => {
-    const commentatorName = document.querySelector('[name="commentator-name"]');
-    const commentatorEmail = document.querySelector('[name="commentator-email"]');
-    const commentatorText = document.querySelector('[name="comment-text"]');
 
     if (commentatorName.value === "" || commentatorEmail.value === "" || commentatorText.value === "") {
       return;
@@ -179,28 +181,64 @@ import {convertTime, validateEmail} from './utils';
   const subComments = [];
 
 
-  function replyThisComment(commentId, anchor) {
+  function replyThisComment(commentatorName, commentId, anchor) {
+    addCommentBtn.removeEventListener('click', addCommentButton);
+    addCommentBtn.setAttribute('onclick', 'addSubCommentButton()');
+    commentatorText.value = `${commentatorName},`;
+  }
+  global.replyThisComment = replyThisComment;
 
+  function addSubCommentButton(name, commentId, anchor) {
+
+    if (commentatorName.value === "" || commentatorEmail.value === "" || commentatorText.value === "") {
+      return;
+    }
+
+    if (validateEmail(commentatorEmail.value) !== true) return;
+
+    let subComment = {
+      name: commentatorName.value,
+      email: commentatorEmail.value,
+      time: Math.floor(Date.now() / 1000),
+      body: commentatorText.value,
+      id: {parentCommentId: commentId, index: Guid},
+      subCommentsQuantity: 0
+    };
+    subComments.push(comment);
+
+    document.querySelector('[name="comment-form"]').reset();
+
+    renderCommentBundleBtns();
+    renderSubComments(comments.slice((comments.length >= 15) ? comments.length-15 : 0));
+
+    addCommentBtn.removeAttribute('onclick');
+    return addCommentBtn.addEventListener('click', addCommentButton);
   }
 
-  // const renderSubComments = (comment) => {
-  //   const commentsField = document.querySelector('.comments');
-  //   let out = `
-  //       <section class="user-comment__data">
-  //         <img src="../src/icons/avatar.png" class="user-comment__avatar">
-  //         <section class="user-comment__name">${comment.name} (${comment.email})</section>
-  //         <section class="user-comment__date">${convertTime(comment.time)}</section>
-  //       </section>
-  //       <p class="user-comment__text">
-  //         ${comment.body}
-  //       </p>
-  //       <button class="reply-comment-btn" id="${comment.id}" type="submit">REPLY</button>
-  //   `;
-  //   let commentElement = document.createElement('section');
-  //   commentElement.setAttribute('class', 'user-comment-wrapper');
-  //   commentElement.innerHTML = out;
-  //
-  //   commentsField.insertBefore(commentElement, commentsField.firstChild);
-  // }
+  function renderSubComments(commentsList) {
+    commentsList.forEach((item) => {
+      let out = `
+        <a name="anchor-${item.id}"></a>
+        <section class="user-comment__data">
+          <img src="../src/icons/avatar.png" class="user-comment__avatar">
+          <section class="user-comment__name">${item.name} (${item.email})</section>
+          <section class="user-comment__date">${convertTime(item.time)}</section>
+        </section>
+        <p class="user-comment__text">
+          ${item.body}
+        </p>
+        <section class="wrapper-comment-interactions">
+          <button class="reply-comment-btn" id="${item.id}" type="submit" oncklick="replyThisComment(${item.id}, )">REPLY</button>
+          <button class="comment-replies-btn" id="${item.id}" type="submit" oncklick="replyThisComment(${item.id}, anchor-${item.id})">
+            <a class="anchor-subcomment" href="#anchor-subcomment">Show replied comments (${(item.subCommentsQuantity !== undefined) ? item.subCommentsQuantity : 0})</a>
+          </button>
+        </section>
+    `;
+      let comment = document.createElement('section');
+      comment.setAttribute('class', 'user-comment-wrapper subcomment');
+      comment.innerHTML = out;
+      commentsField.insertBefore(comment, commentsField.firstChild);
+    });
+  }
 
 })();

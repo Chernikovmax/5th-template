@@ -68,3 +68,6 @@
 .comment-replies-btn:hover {
   color: rgb(6, 163, 252);
 }
+.anchor-subcomment {
+  color:inherit;
+}

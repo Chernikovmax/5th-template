@@ -188,7 +188,7 @@
         </li>
       </ul>
     </div>
-    <!-- -------------------------- Comments ------------------------- -->
+    <!---------------------------- Comments --------------------------->
     <button class="show-comments-btn">Show comments</button>
 
     <div class="comments-field center-align">
@@ -196,6 +196,7 @@
       <hr class="regular-red-underscore">
 
       <form name="comment-form" class="comment-form">
+        <a name="anchor-subcomment"></a>
         <input required class="comment-form__name" type="text" name="commentator-name" maxlength="50" placeholder="your name">
         <input required class="comment-form__email" type="email" name="commentator-email" maxlength="100" placeholder="your email (example@email.com)">
         <section class="comment-form__wrapper">
@@ -203,7 +204,6 @@
           <button type="submit" class="comment-form__send-btn" id="add-comment">add Comment</button>
         </section>
       </form>
-
       <section class="comments-nav" id="top-comments-nav">
 
       </section>
@@ -231,7 +231,6 @@
           <input required class="cotact-form__input" type="email" name="sender-email" maxlength="100" placeholder="Your Mail">
           <textarea required class="cotact-form__input cotact-form__input-text" name="sender-text" maxlength="500" placeholder="Type your message" cols="40" rows="5"></textarea>
           <button type="submit" class="cotact-form__send-btn" id="send-message">SEND MESSAGE</button>
-
         </form>
       </section>
       <address class="contacts__info">
