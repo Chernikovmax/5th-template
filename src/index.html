@@ -197,11 +197,11 @@
 
       <form name="comment-form" class="comment-form">
         <a name="anchor-subcomment"></a>
-        <input required class="comment-form__name" type="text" name="commentator-name" maxlength="50" placeholder="your name">
+        <input required class="comment-form__name" type="text" name="commentator-name" id="comment-input-name" maxlength="50" placeholder="your name">
         <input required class="comment-form__email" type="email" name="commentator-email" maxlength="100" placeholder="your email (example@email.com)">
         <section class="comment-form__wrapper">
           <input required type="text" class="comment-form__textfield" name="comment-text" maxlength="500" placeholder="put your comment here" cols="40" rows="5">
-          <button type="submit" class="comment-form__send-btn" id="add-comment">add Comment</button>
+          <button type="button" class="comment-form__send-btn" id="add-comment">add Comment</button>
         </section>
       </form>
       <section class="comments-nav" id="top-comments-nav">

@@ -9,7 +9,10 @@
 
 .subcomment {
   width: 95%;
-  margin-left: 5%;
+  margin: 0.2rem 0 0.2rem 5%;
+  border-top: 1px solid #ff2d2d;
+  /* margin-left: 5%;
+  margin-bottom: 0.3rem; */
 }
 
 .user-comment__data {
@@ -68,6 +71,18 @@
 .comment-replies-btn:hover {
   color: rgb(6, 163, 252);
 }
+
 .anchor-subcomment {
-  color:inherit;
+  color:rgb(3, 136, 212);
+  font-size: 0.8rem;
+}
+.anchor-subcomment:hover {
+  color:rgb(6, 163, 252);
+}
+
+.commentator-anchor {
+  font-weight: bold;
+}
+.commentator-anchor:hover {
+  color: rgb(6, 163, 252);
 }

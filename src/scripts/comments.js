@@ -1,6 +1,8 @@
 import {convertTime, validateEmail} from './utils';
+const uuidv1 = require('uuid/v1');
 
 (function () {
+  const commentForm = document.querySelector('[name="comment-form"]');
   const commentsField = document.querySelector('.comments');
   const addCommentBtn = document.getElementById('add-comment');
   let comments = [];
@@ -31,14 +33,17 @@ import {convertTime, validateEmail} from './utils';
         ${item.body}
       </p>
       <section class="wrapper-comment-interactions">
-        <button class="reply-comment-btn" id="${item.id}" type="submit" oncklick="replyThisComment(${item.id}, )">REPLY</button>
-        <button class="comment-replies-btn" id="${item.id}" type="submit" oncklick="replyThisComment(${item.name}, ${item.id}, anchor-${item.id})">
-          <a class="anchor-subcomment" href="#anchor-subcomment">Show replied comments (${(item.subCommentsQuantity !== undefined) ? item.subCommentsQuantity : 0})</a>
+        <button class="reply-comment-btn" type="button" onclick="replyThisComment('${item.name}', ${item.id})">
+        REPLY
+        </button>
+        <button class="comment-replies-btn">
+          Show replied comments (${(item.subCommentsQuantity !== undefined) ? item.subCommentsQuantity : 0})
         </button>
       </section>
   `;
     let comment = document.createElement('section');
     comment.setAttribute('class', 'user-comment-wrapper');
+    comment.setAttribute('id', `comment-${item.id}`);
     comment.innerHTML = out;
     commentsField.insertBefore(comment, commentsField.firstChild);
   });
@@ -82,12 +87,12 @@ import {convertTime, validateEmail} from './utils';
       email: commentatorEmail.value,
       time: Math.floor(Date.now() / 1000),
       body: commentatorText.value,
-      id: comments.length + 1,
+      id: comments.length+1,
       subCommentsQuantity: 0
     };
     comments.push(comment);
 
-    document.querySelector('[name="comment-form"]').reset();
+    commentForm.reset();
 
     renderCommentBundleBtns();
     renderComments(comments.slice((comments.length >= 15) ? comments.length-15 : 0));
@@ -178,18 +183,18 @@ import {convertTime, validateEmail} from './utils';
 
 
 /*----------------------------------------------------------------------------------------Subcomments-----------------------------------------------------------------------*/
-  const subComments = [];
+  const subComments = {};
+  global.subComments = subComments;
 
 
-  function replyThisComment(commentatorName, commentId, anchor) {
+  function replyThisComment(commentatorName, commentId) {
+    document.getElementById("comment-input-name").focus();
     addCommentBtn.removeEventListener('click', addCommentButton);
-    addCommentBtn.setAttribute('onclick', 'addSubCommentButton()');
-    commentatorText.value = `${commentatorName},`;
+    addCommentBtn.setAttribute('onclick', `addSubCommentButton('${commentatorName}', ${commentId}, ${commentBundleIndex})`);
   }
   global.replyThisComment = replyThisComment;
 
-  function addSubCommentButton(name, commentId, anchor) {
-
+  function addSubCommentButton(name, commentId) {
     if (commentatorName.value === "" || commentatorEmail.value === "" || commentatorText.value === "") {
       return;
     }
@@ -201,22 +206,33 @@ import {convertTime, validateEmail} from './utils';
       email: commentatorEmail.value,
       time: Math.floor(Date.now() / 1000),
       body: commentatorText.value,
-      id: {parentCommentId: commentId, index: Guid},
+      id: uuidv1(),
+      parrentCommentId: commentId,
+      parrentCommentName: name,
       subCommentsQuantity: 0
     };
-    subComments.push(comment);
 
-    document.querySelector('[name="comment-form"]').reset();
+    if (subComments[commentId] !== undefined) {
+      subComments[commentId].push(subComment);
+    } else {
+        subComments[commentId] = [subComment];
+      }
 
-    renderCommentBundleBtns();
-    renderSubComments(comments.slice((comments.length >= 15) ? comments.length-15 : 0));
+    if (comments[commentId]) {
+      comments[commentId].subCommentsQuantity+1;
+    } else {
+      subComments[commentId].subCommentsQuantity+1;
+    }
 
-    addCommentBtn.removeAttribute('onclick');
-    return addCommentBtn.addEventListener('click', addCommentButton);
+    commentForm.reset();
+    renderCertainComments(commentBundleIndex);
+    renderSubComments(subComments[commentId]);
   }
+  global.addSubCommentButton = addSubCommentButton;
 
   function renderSubComments(commentsList) {
-    commentsList.forEach((item) => {
+    commentsList.reverse().forEach((item) => {
+      let parentComment = document.getElementById(`comment-${item.parrentCommentId}`);
       let out = `
         <a name="anchor-${item.id}"></a>
         <section class="user-comment__data">
@@ -225,20 +241,26 @@ import {convertTime, validateEmail} from './utils';
           <section class="user-comment__date">${convertTime(item.time)}</section>
         </section>
         <p class="user-comment__text">
+          <a class="commentator-anchor" href="#anchor-${item.parrentCommentId}">${item.parrentCommentName},</a>
           ${item.body}
         </p>
         <section class="wrapper-comment-interactions">
-          <button class="reply-comment-btn" id="${item.id}" type="submit" oncklick="replyThisComment(${item.id}, )">REPLY</button>
-          <button class="comment-replies-btn" id="${item.id}" type="submit" oncklick="replyThisComment(${item.id}, anchor-${item.id})">
-            <a class="anchor-subcomment" href="#anchor-subcomment">Show replied comments (${(item.subCommentsQuantity !== undefined) ? item.subCommentsQuantity : 0})</a>
+          <button class="reply-comment-btn" type="button" oncklick="replyThisComment(${item.name}, ${item.id})">
+          <a class="anchor-subcomment" href="#anchor-subcomment">REPLY</a>
+          </button>
+          <button class="comment-replies-btn">
+            Show replied comments (${(item.subCommentsQuantity !== undefined) ? item.subCommentsQuantity : 0})
           </button>
         </section>
     `;
       let comment = document.createElement('section');
       comment.setAttribute('class', 'user-comment-wrapper subcomment');
+      comment.setAttribute('id', `comment-${item.id}`);
       comment.innerHTML = out;
-      commentsField.insertBefore(comment, commentsField.firstChild);
+      parentComment.appendChild(comment);
     });
+    addCommentBtn.removeAttribute('onclick');
+    addCommentBtn.addEventListener('click', addCommentButton);
   }
 
 })();
