@@ -8,11 +8,10 @@
 }
 
 .subcomment {
-  width: 98%;
-  margin: 0.2rem 0 0.2rem 5%;
-  border-top: 1px solid #ff2d2d;
-  /* margin-left: 5%;
-  margin-bottom: 0.3rem; */
+  width: 98.4%;
+  margin: 0.2rem 0 0.2rem 1%;
+  border: 1px dotted #ff2d2d;
+  padding-left: 0.2rem;
 }
 
 .user-comment__data {
