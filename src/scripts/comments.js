@@ -5,6 +5,7 @@ const uuidv1 = require('uuid/v1');
   const commentForm = document.querySelector('[name="comment-form"]');
   const commentsField = document.querySelector('.comments');
   const addCommentBtn = document.getElementById('add-comment');
+  const addSubCommentBtn = document.getElementById('add-subcomment');
   let comments = [];
 
   const topCommentsNav = document.querySelector('#top-comments-nav');
@@ -22,6 +23,7 @@ const uuidv1 = require('uuid/v1');
   };
 
   const renderComments = (commentsList) => commentsList.forEach((item) => {
+    item.subCommentsQuantity = 0;
     let out = `
       <a name="anchor-${item.id}"></a>
       <section class="user-comment__data">
@@ -33,11 +35,9 @@ const uuidv1 = require('uuid/v1');
         ${item.body}
       </p>
       <section class="wrapper-comment-interactions">
-        <button class="reply-comment-btn" type="button" onclick="replyThisComment('${item.name}', ${item.id})">
-        REPLY
-        </button>
-        <button class="comment-replies-btn">
-          Show replied comments (${(item.subCommentsQuantity !== undefined) ? item.subCommentsQuantity : 0})
+        <button class="reply-comment-btn" type="button" onclick="replyThisComment('${item.name}', ${item.id})">REPLY</button>
+        <button class="comment-replies-btn" id="replies-${item.id}">
+          Show replied comments (${item.subCommentsQuantity})
         </button>
       </section>
   `;
@@ -142,9 +142,6 @@ const uuidv1 = require('uuid/v1');
   }
   global.renderCertainComments = renderCertainComments;
 
-  // let buttons = document.querySelectorAll('.comments-nav__btn');
-  // parseInt(buttons[1].innerText, 10);
-
   function createBtn(btnClass, btnId, btnName, btnLocation, onClick) {
     let commentsBundleBtn = document.createElement("button");
     commentsBundleBtn.setAttribute('class', `${btnClass}`);
@@ -188,9 +185,11 @@ const uuidv1 = require('uuid/v1');
 
 
   function replyThisComment(commentatorName, commentId) {
+    addCommentBtn.classList.remove('comment-form__send-btn--active');
+    addSubCommentBtn.classList.add('comment-form__send-btn--active');
     document.getElementById("comment-input-name").focus();
-    addCommentBtn.removeEventListener('click', addCommentButton);
-    addCommentBtn.setAttribute('onclick', `addSubCommentButton('${commentatorName}', ${commentId}, ${commentBundleIndex})`);
+    showCommentsBtn.addEventListener('click', activateComments);
+    addSubCommentBtn.setAttribute('onclick', `addSubCommentButton('${commentatorName}', ${commentId})`);
   }
   global.replyThisComment = replyThisComment;
 
@@ -206,11 +205,12 @@ const uuidv1 = require('uuid/v1');
       email: commentatorEmail.value,
       time: Math.floor(Date.now() / 1000),
       body: commentatorText.value,
-      id: uuidv1(),
+      id: Date.now() + commentId,
       parrentCommentId: commentId,
       parrentCommentName: name,
       subCommentsQuantity: 0
     };
+    subComment.postId = (subComments[subComment.id]) ? subComments[subComment.id].length : 0;
 
     if (subComments[commentId] !== undefined) {
       subComments[commentId].push(subComment);
@@ -218,14 +218,15 @@ const uuidv1 = require('uuid/v1');
         subComments[commentId] = [subComment];
       }
 
-    if (comments[commentId]) {
-      comments[commentId].subCommentsQuantity+1;
-    } else {
-      subComments[commentId].subCommentsQuantity+1;
+    if (comments[commentId-1]) {
+      comments[commentId-1].subCommentsQuantity++;
     }
+      if (subComments[commentId]) {
+        subComments[commentId][subComment.postId].subCommentsQuantity++;
+      }
 
     commentForm.reset();
-    renderCertainComments(commentBundleIndex);
+    // document.getElementById(`replies-${commentId}`).innerText = `Show replied comments (${comments[commentId-1].subCommentsQuantity})`;
     renderSubComments(subComments[commentId]);
   }
   global.addSubCommentButton = addSubCommentButton;
@@ -245,11 +246,9 @@ const uuidv1 = require('uuid/v1');
           ${item.body}
         </p>
         <section class="wrapper-comment-interactions">
-          <button class="reply-comment-btn" type="button" oncklick="replyThisComment(${item.name}, ${item.id})">
-          <a class="anchor-subcomment" href="#anchor-subcomment">REPLY</a>
-          </button>
-          <button class="comment-replies-btn">
-            Show replied comments (${(item.subCommentsQuantity !== undefined) ? item.subCommentsQuantity : 0})
+          <button class="reply-comment-btn" type="button" onclick="replyThisComment('${item.name}', ${item.id})">REPLY</button>
+          <button class="comment-replies-btn" onclick="renderSubComments(${subComments[item.parrentCommentId]})">
+            Show replied comments (${item.subCommentsQuantity})
           </button>
         </section>
     `;
@@ -259,8 +258,9 @@ const uuidv1 = require('uuid/v1');
       comment.innerHTML = out;
       parentComment.appendChild(comment);
     });
-    addCommentBtn.removeAttribute('onclick');
-    addCommentBtn.addEventListener('click', addCommentButton);
+    addSubCommentBtn.removeAttribute('onclick');
+    addSubCommentBtn.classList.remove('comment-form__send-btn--active');
+    addCommentBtn.classList.add('comment-form__send-btn--active');
   }
 
 })();
