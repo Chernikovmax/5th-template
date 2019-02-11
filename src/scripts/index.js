@@ -64,7 +64,7 @@ global.setPrevSlide = setPrevSlide;
 
 function setNextSlide() {
   pauseSlideshow();
-  slideChange(slideIndex-1);
+  slideChange(slideIndex+1);
 }
 global.setNextSlide = setNextSlide;
 
