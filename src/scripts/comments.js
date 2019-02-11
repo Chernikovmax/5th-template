@@ -23,7 +23,7 @@ const uuidv1 = require('uuid/v1');
   };
 
   const renderComments = (commentsList) => commentsList.forEach((item) => {
-    item.subCommentsQuantity = 0;
+    // item.subCommentsQuantity = 0;
     let out = `
       <a name="anchor-${item.id}"></a>
       <section class="user-comment__data">
@@ -36,10 +36,11 @@ const uuidv1 = require('uuid/v1');
       </p>
       <section class="wrapper-comment-interactions">
         <button class="reply-comment-btn" type="button" onclick="replyThisComment('${item.name}', ${item.id})">REPLY</button>
-        <button class="comment-replies-btn" id="replies-${item.id}">
-          Show replied comments (${item.subCommentsQuantity})
+        <button class="comment-replies-btn" id="replies-${item.id}" onclick="renderSubComments(${item.id})">
+          Show replied comments (${(subComments[item.id] !== undefined) ? subComments[item.id].length : 0})
         </button>
       </section>
+      <section id="comment-replies-${item.id}"></section>
   `;
     let comment = document.createElement('section');
     comment.setAttribute('class', 'user-comment-wrapper');
@@ -72,7 +73,7 @@ const uuidv1 = require('uuid/v1');
 
 // --------------------------------------------------------------------------------
 
-// ----------------------Button wich add a new comment and render it immediatly------------------------------
+// ----------------------Button wich adds a new comment and renders it immediatly------------------------------
 
   const addCommentButton = () => {
 
@@ -87,14 +88,15 @@ const uuidv1 = require('uuid/v1');
       email: commentatorEmail.value,
       time: Math.floor(Date.now() / 1000),
       body: commentatorText.value,
-      id: comments.length+1,
-      subCommentsQuantity: 0
+      id: comments.length + Date.now()
     };
     comments.push(comment);
 
     commentForm.reset();
 
     renderCommentBundleBtns();
+    document.querySelector(`#comments-bottom0`).classList.add('comments-nav__btn--active');
+    document.querySelector(`#comments-top0`).classList.add('comments-nav__btn--active');
     renderComments(comments.slice((comments.length >= 15) ? comments.length-15 : 0));
   };
 
@@ -207,10 +209,8 @@ const uuidv1 = require('uuid/v1');
       body: commentatorText.value,
       id: Date.now() + commentId,
       parrentCommentId: commentId,
-      parrentCommentName: name,
-      subCommentsQuantity: 0
+      parrentCommentName: name
     };
-    subComment.postId = (subComments[subComment.id]) ? subComments[subComment.id].length : 0;
 
     if (subComments[commentId] !== undefined) {
       subComments[commentId].push(subComment);
@@ -218,22 +218,18 @@ const uuidv1 = require('uuid/v1');
         subComments[commentId] = [subComment];
       }
 
-    if (comments[commentId-1]) {
-      comments[commentId-1].subCommentsQuantity++;
-    }
-      if (subComments[commentId]) {
-        subComments[commentId][subComment.postId].subCommentsQuantity++;
-      }
-
     commentForm.reset();
-    // document.getElementById(`replies-${commentId}`).innerText = `Show replied comments (${comments[commentId-1].subCommentsQuantity})`;
-    renderSubComments(subComments[commentId]);
+    renderSubComments(commentId);
   }
   global.addSubCommentButton = addSubCommentButton;
 
-  function renderSubComments(commentsList) {
-    commentsList.reverse().forEach((item) => {
-      let parentComment = document.getElementById(`comment-${item.parrentCommentId}`);
+  function renderSubComments(parrentCommentId) {
+    const parentCommentReplies = document.getElementById(`comment-replies-${parrentCommentId}`);
+    parentCommentReplies.innerHTML = '';
+    const parentCommentRepliesBtn = document.getElementById(`replies-${parrentCommentId}`);
+    parentCommentRepliesBtn.innerText = `Show replied comments (${subComments[parrentCommentId].length})`;
+
+    subComments[parrentCommentId].forEach((item) => {
       let out = `
         <a name="anchor-${item.id}"></a>
         <section class="user-comment__data">
@@ -247,20 +243,24 @@ const uuidv1 = require('uuid/v1');
         </p>
         <section class="wrapper-comment-interactions">
           <button class="reply-comment-btn" type="button" onclick="replyThisComment('${item.name}', ${item.id})">REPLY</button>
-          <button class="comment-replies-btn" onclick="renderSubComments(${subComments[item.parrentCommentId]})">
-            Show replied comments (${item.subCommentsQuantity})
+          <button class="comment-replies-btn" id="replies-${item.id}" onclick="renderSubComments(${item.id})">
+            Show replied comments (${(subComments[item.id] !== undefined) ? subComments[item.id].length : 0})
           </button>
         </section>
+        <section id="comment-replies-${item.id}"></section>
     `;
       let comment = document.createElement('section');
       comment.setAttribute('class', 'user-comment-wrapper subcomment');
       comment.setAttribute('id', `comment-${item.id}`);
       comment.innerHTML = out;
-      parentComment.appendChild(comment);
+      parentCommentReplies.insertBefore(comment, parentCommentReplies.firstChild);
+      // parentComment.appendChild(comment);
     });
+
     addSubCommentBtn.removeAttribute('onclick');
     addSubCommentBtn.classList.remove('comment-form__send-btn--active');
     addCommentBtn.classList.add('comment-form__send-btn--active');
   }
+  global.renderSubComments = renderSubComments;
 
 })();
