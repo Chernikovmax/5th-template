@@ -23,7 +23,7 @@ const uuidv1 = require('uuid/v1');
   };
 
   const renderComments = (commentsList) => commentsList.forEach((item) => {
-    // item.subCommentsQuantity = 0;
+
     let out = `
       <a name="anchor-${item.id}"></a>
       <section class="user-comment__data">
@@ -254,7 +254,6 @@ const uuidv1 = require('uuid/v1');
       comment.setAttribute('id', `comment-${item.id}`);
       comment.innerHTML = out;
       parentCommentReplies.insertBefore(comment, parentCommentReplies.firstChild);
-      // parentComment.appendChild(comment);
     });
 
     addSubCommentBtn.removeAttribute('onclick');
