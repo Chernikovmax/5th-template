@@ -3,11 +3,12 @@
   margin-top: 30px;
   display: flex;
   height: 800px;
-  width: 100%;
+  width: 55%;
 }
 
 .contacts__letter {
   width: 100%;
+  height: 640px;
   margin: 7% 2% 7% 0;
   display: flex;
   flex-direction: column;
@@ -15,7 +16,7 @@
 
 .contacts__wrapper {
   width: 100%;
-  height: 500px;
+  height: 600px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -68,7 +69,7 @@
   padding-left: 6%;
   padding-right: 12%;
   width: 20%;
-  height: 100%;
+  height: 98%;
   background-color: #2d2d2d;
   color: #a8a8a8;
 }
