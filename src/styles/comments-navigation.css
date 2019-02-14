@@ -1,4 +1,25 @@
 /* Comments navigation styles */
+.show-comments-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.show-comments-btn {
+  margin-bottom: 2rem;
+  height: 2.5rem;
+  left: 50%;
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid #ff2d2d;
+  padding-bottom: 0.3rem;
+  cursor: pointer;
+}
+.show-comments-btn:hover {
+  border-bottom: 4px solid #fc0000;
+}
 
 .comments-nav {
   height: 6.5rem;
@@ -11,13 +32,15 @@
 }
 
 .comments-nav__btn {
-  height: 2rem;
-  width: 2rem;
+  position: relative;
+  height: 2.2rem;
+  width: 2.4rem;
   margin-left: 0.25rem;
   margin-right: 0.25rem;
-  padding-left: 4px;
   border: none;
+  outline: 0.2rem solid transparent;
   border-radius: 5px;
+  text-align: center;
   font-size: 1.5rem;
   font-family: 'Calibri';
   background-color: #f56364;
@@ -26,10 +49,9 @@
 
 .comments-nav__btn--active {
   background-color: #f42728;
-  height: 2.4rem;
-  width: 2.4rem;
-  margin-left: 0.05rem;
-  margin-right: 0.05rem;
+  outline: none;
+  outline: 0.2rem solid #f42728;
+  border-radius: 0;
 }
 
 .comments-nav__btn:hover {
