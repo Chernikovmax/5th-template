@@ -1,8 +1,13 @@
 .comments-field {
-  display: flex;
+  display: none;
   flex-direction: column;
+  width: 1250px;
   margin-left: 0;
   height: auto;
+}
+
+.comments-field--active {
+  display: flex;
 }
 
 .comment-form {
@@ -47,6 +52,7 @@
 }
 
 .comment-form__send-btn {
+  display: none;
   text-align: center;
   padding: 13px 10px 11px 10px;
   height: 86px;
@@ -62,6 +68,10 @@
 .comment-form__send-btn__send-btn:hover {
   background-color: #f41a1a;
   font-size: 22px;
+}
+
+.comment-form__send-btn--active {
+  display: block;
 }
 
 .comments {

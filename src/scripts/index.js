@@ -64,7 +64,7 @@ global.setPrevSlide = setPrevSlide;
 
 function setNextSlide() {
   pauseSlideshow();
-  slideChange(slideIndex-1);
+  slideChange(slideIndex+1);
 }
 global.setNextSlide = setNextSlide;
 
@@ -77,7 +77,7 @@ global.playbackSwitcher = playbackSwitcher;
 
 function playSlideshow() {
   play = true;
-  playbackBtn.innerHTML = '&#10074;&#10074;';
+  playbackBtn.innerHTML = '&#9612;&#9612;';
   slideInterval = setInterval(nextSlide, 2500);
 }
 

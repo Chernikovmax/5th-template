@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="./src/icons/favicon.ico">
   <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
@@ -17,8 +18,8 @@
     </ul>
   </header>
 
-  <main>
-    <div class="centered-wrapper">
+  <main class="main-field">
+    <div class="centering-wrapper">
       <section class="slides">
 
         <section class="slide">
@@ -75,7 +76,7 @@
         <a href="#" class="slide__contact-btn">Contact Us</a>
 
         <section class="slide-switches">
-          <button class="slide-switches__playback" onclick="playbackSwitcher()">&#10074;&#10074;</button>
+          <button class="slide-switches__playback" onclick="playbackSwitcher()">&#9612;&#9612;</button>
           <button class="slide-switches__prev" onclick="setPrevSlide()"><</button>
           <button class="slide-switches__dot" onclick="setSlide(0)"></button>
           <button class="slide-switches__dot" onclick="setSlide(1)"></button>
@@ -87,7 +88,8 @@
       </section>
     </div>
 
-    <div class="info-container center-align">
+
+    <div class="info-container">
 
       <section class="common-info">
         <span class="regular-title">
@@ -142,6 +144,7 @@
       </section>
     </div>
 
+
     <hr class="dividing-line">
 
     <div class="feature-products">
@@ -187,31 +190,37 @@
         </li>
       </ul>
     </div>
+    <!---------------------------- Comments --------------------------->
+    <div class="show-comments-container">
+      <button class="show-comments-btn">Show comments</button>
 
-    <div class="comments-field center-align">
-      <span class="regular-title">Comments</span>
-      <hr class="regular-red-underscore">
+      <div class="comments-field">
+        <span class="regular-title">Comments</span>
+        <hr class="regular-red-underscore">
 
-      <form name="comment-form" class="comment-form">
-        <input required class="comment-form__name" type="text" name="commentator-name" maxlength="50" placeholder="your name">
-        <input required class="comment-form__email" type="email" name="commentator-email" maxlength="100" placeholder="your email (example@email.com)">
-        <section class="comment-form__wrapper">
-          <input required type="text" class="comment-form__textfield" name="comment-text" maxlength="500" placeholder="put your comment here" cols="40" rows="5">
-          <button type="submit" class="comment-form__send-btn" id="add-comment">add Comment</button>
+        <form name="comment-form" class="comment-form">
+          <a name="anchor-subcomment"></a>
+          <input required class="comment-form__name" type="text" name="commentator-name" id="comment-input-name" maxlength="50" placeholder="your name">
+          <input required class="comment-form__email" type="email" name="commentator-email" maxlength="100" placeholder="your email (example@email.com)">
+          <section class="comment-form__wrapper">
+            <input required type="text" class="comment-form__textfield" name="comment-text" maxlength="2000" placeholder="put your comment here" cols="40" rows="5">
+            <button type="button" class="comment-form__send-btn comment-form__send-btn--active" id="add-comment">add Comment</button>
+            <button type="button" class="comment-form__send-btn" id="add-subcomment">add Sub Comment</button>
+          </section>
+        </form>
+        <section class="comments-nav" id="top-comments-nav">
+
         </section>
-      </form>
 
-      <section class="comments-nav" id="top-comments-nav">
-      </section>
+        <section class="comments">
+        </section>
 
-      <section class="comments">
-      </section>
-
-      <section class="comments-nav" id="bottom-comments-nav">
-      </section>
-
+        <section class="comments-nav" id="bottom-comments-nav">
+        </section>
+      </div>
     </div>
-    <div class="contacts center-align">
+        <!-- ------------------------ Comments (end of section) ------------------------- -->
+    <div class="contacts">
       <section class="contacts__letter">
         <span class="regular-title">
           GET IN TOUCH
@@ -222,21 +231,22 @@
           adipis cing elit, ed doi eiusmod tempor incididunt ut labore et.
         </p>
         <hr class="regular-red-underscore">
+      <section class="contacts__wrapper">
         <form name="contact-form" class="cotact-form">
           <input required class="cotact-form__input" type="text" name="sender-name" maxlength="50" placeholder="Name">
           <input required class="cotact-form__input" type="email" name="sender-email" maxlength="100" placeholder="Your Mail">
           <textarea required class="cotact-form__input cotact-form__input-text" name="sender-text" maxlength="500" placeholder="Type your message" cols="40" rows="5"></textarea>
           <button type="submit" class="cotact-form__send-btn" id="send-message">SEND MESSAGE</button>
-
         </form>
+        <address class="contacts__info">
+          <span class="contacts__info-title">CONTACT INFO</span>
+          <span class="contacts__info-address">Jalalabad 24 / A, Ambaarkhana, Sylhet,
+  Bangladesh</span>
+          <a href="mailto:redwan@deviserweb.com" class="contacts__info-email">redwan@deviserweb.com</a>
+          <a href="tel:(+88)017-617-46373" class="contacts__info-telr">(+88) 017 617 46373</a>
+        </address>
       </section>
-      <address class="contacts__info">
-        <span class="contacts__info-title">CONTACT INFO</span>
-        <span class="contacts__info-address">Jalalabad 24 / A, Ambaarkhana, Sylhet,
-Bangladesh</span>
-        <a href="mailto:redwan@deviserweb.com" class="contacts__info-email">redwan@deviserweb.com</a>
-        <a href="tel:(+88)017-617-46373" class="contacts__info-telr">(+88) 017 617 46373</a>
-      </address>
+      </section>
     </div>
 
   </main>
