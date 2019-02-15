@@ -56,6 +56,11 @@
   outline: none;
 }
 
+.comments-nav__btn--active {
+  border-color: #f42728;
+  background-color: #f42728;
+} */
+
 .comments-nav__btn:hover {
   background-color: #f42728;
 }
