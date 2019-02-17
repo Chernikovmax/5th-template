@@ -1,0 +1,31 @@
+@import "./header.css";
+@import "./home/main.css";
+@import "./home/homapage-body-main.css";
+@import "./home/comments-form.css";
+@import "./home/comments-themselves.css";
+@import "./home/comments-navigation.css";
+@import "./home/contact-info.css";
+@import "./footer.css";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Calibri", "Helvetica";
+  font-weight: 400;
+  color: #000;
+}
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+p {
+  opacity: 0.7;
+}

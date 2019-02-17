@@ -1,4 +1,4 @@
-import '../styles/main.css';
+import '../styles/index.css';
 
 import './feature-products-gallery.js';
 
