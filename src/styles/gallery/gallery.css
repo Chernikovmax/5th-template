@@ -1,6 +1,7 @@
 @import "../header.css";
+@import "./main.css";
+@import "./modal.css";
 @import "../footer.css";
-
 
 html,
 body {
@@ -23,4 +24,9 @@ li {
 
 p {
   opacity: 0.7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
