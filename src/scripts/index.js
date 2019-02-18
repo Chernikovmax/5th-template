@@ -86,3 +86,8 @@ function pauseSlideshow() {
   playbackBtn.innerHTML = '&#9658';
   clearInterval(slideInterval);
 }
+
+function focusOnLetter() {
+  document.getElementById('addressee-name').focus();
+}
+document.querySelector('.slide__contact-btn').addEventListener('click', focusOnLetter);
