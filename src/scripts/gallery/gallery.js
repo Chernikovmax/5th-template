@@ -7,6 +7,9 @@ const picsQuantity = document.querySelectorAll('.gallery__item').length;
 const modal = document.querySelector('#gallery-modal');
 const modalImage = document.querySelector('.modal-nav__image');
 
+const prevBtn = document.querySelector('#prev-btn');
+const nextBtn = document.querySelector('#next-btn');
+
 const toggleModal = () => {
   if (document.querySelector('.modal-nav__picture') !== null) {
     document.querySelector('.modal-nav__picture').remove();
@@ -25,7 +28,7 @@ const openCertainModal = (index) => {
   image.setAttribute('alt', 'Some mountain');
   image.setAttribute('src', `./media/imgs/mountains/${index}_mountain.jpg`);
 
-  modalImage.insertBefore(image, modalImage.firstChild);
+  modalImage.insertBefore(image, nextBtn);
 };
 global.openCertainModal = openCertainModal;
 
@@ -38,7 +41,7 @@ const setPicture = (index) => {
   image.setAttribute('alt', 'Some mountain');
   image.setAttribute('src', `./media/imgs/mountains/${index}_mountain.jpg`);
 
-  modalImage.insertBefore(image, modalImage.firstChild);
+  modalImage.insertBefore(image, nextBtn);
 };
 global.setPicture = setPicture;
 
@@ -49,14 +52,6 @@ const activateMiniPic = (index) => {
   currentImage = index;
 };
 
-const nextPic = () => {
-  if ((currentImage+1) < picsQuantity) {
-    setPicture(currentImage+1);
-  } else {
-      setPicture(0);
-    }
-};
-
 const prevPic = () => {
   if ((currentImage-1) > 0) {
     setPicture(currentImage-1);
@@ -64,3 +59,14 @@ const prevPic = () => {
       setPicture(picsQuantity-1);
     }
 };
+prevBtn.addEventListener('click', prevPic);
+
+
+const nextPic = () => {
+  if ((currentImage+1) < picsQuantity) {
+    setPicture(currentImage+1);
+  } else {
+      setPicture(0);
+    }
+};
+nextBtn.addEventListener('click', nextPic);
