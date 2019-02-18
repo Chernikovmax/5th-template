@@ -4,24 +4,26 @@
 }
 
 .gallery {
-  padding: 1rem 2rem;
+  padding: 1rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .gallery__item {
-  width:300px;
+  width:260px;
   height: 150px;
   background-color: rgba(0, 0, 0, 0.50);
-  margin-top: .5rem;
-  margin-bottom: .5rem;
+  outline: 0.5rem solid transparent;
+  margin: .5rem .2rem;
+  /* margin-top: .5rem;
+  margin-bottom: .5rem; */
   transition: all 0.3s;
 }
 .gallery__item:hover {
+  position: relative;
+  outline: none;
   transform: scale(1.2);
-  margin-top: 0;
-  margin-bottom: 0;
   z-index: 5;
 }
 
