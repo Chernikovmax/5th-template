@@ -18,8 +18,15 @@ const toggleModal = () => {
 };
   document.querySelector('#close-btn').addEventListener('click', toggleModal);
 
+
+const clearClassOnClose = () => {
+  document.querySelector('.modal-nav__mini-active').classList.remove('modal-nav__mini-active');
+};
+  document.querySelector('#close-btn').addEventListener('click', clearClassOnClose);
+
+
 const openCertainModal = (index) => {
-  document.querySelectorAll('.modal-nav__mini-pic')[index].classList.add('modal-nav__mini-active');
+  document.querySelectorAll('.modal-nav__mini')[index].classList.add('modal-nav__mini-active');
   toggleModal();
   currentImage = index;
 
@@ -46,7 +53,7 @@ const setPicture = (index) => {
 global.setPicture = setPicture;
 
 const activateMiniPic = (index) => {
-  const miniPics = document.querySelectorAll('.modal-nav__mini-pic');
+  const miniPics = document.querySelectorAll('.modal-nav__mini');
   miniPics[currentImage].classList.remove('modal-nav__mini-active');
   miniPics[index].classList.add('modal-nav__mini-active');
   currentImage = index;

@@ -11,12 +11,11 @@
 }
 
 .gallery__item {
-  position: relative;
   width:300px;
   height: 150px;
+  background-color: rgba(0, 0, 0, 0.50);
   margin-top: .5rem;
   margin-bottom: .5rem;
-  z-index: 1;
   transition: all 0.3s;
 }
 .gallery__item:hover {
@@ -27,11 +26,13 @@
 }
 
 .gallery__item-link {
+  display: flex;
+  justify-content: center;
   height: inherit;
   width: inherit;
 }
 
 .gallery__item-pic {
   height: inherit;
-  width: inherit;
+  width: auto;
 }
