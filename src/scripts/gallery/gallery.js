@@ -29,6 +29,7 @@ const clearClassOnClose = () => {
 const openCertainModal = (index) => {
   document.querySelectorAll('.modal-nav__mini')[index].classList.add('modal-nav__mini-active');
   toggleModal();
+  document.querySelectorAll('.modal-nav__mini')[index].focus();
   currentImage = index;
 
   const image = document.createElement('img');
@@ -57,6 +58,7 @@ const activateMiniPic = (index) => {
   const miniPics = document.querySelectorAll('.modal-nav__mini');
   miniPics[currentImage].classList.remove('modal-nav__mini-active');
   miniPics[index].classList.add('modal-nav__mini-active');
+  miniPics[index].focus();
   currentImage = index;
 };
 
@@ -78,3 +80,29 @@ const nextPic = () => {
     }
 };
 nextBtn.addEventListener('click', nextPic);
+
+//
+// // Scroll To Element Smothy with Vanilla JavaScript
+// let offset = 0;
+// let call;
+// function scroll() {
+//   if ((offset - document.documentElement.scrollTop) > 0) {
+//     document.documentElement.scrollTop += 10;
+//   }
+//   else if ((offset - document.documentElement.scrollTop) < 0) {
+//     document.documentElement.scrollTop -= 10;
+//   }
+//   else {
+//       clearInterval(call);
+//   }
+// }
+// // Add Event Listener to parent Element
+// document.querySelectorAll('.modal-nav').addEventListener("click", replyClick);
+//
+// //CallBack Function
+// function replyClick(e) {
+//   e.preventDefault();
+//   call = setInterval(scroll, 10);
+//   target = e.srcElement.dataset.scroll;
+//   offset = document.getElementById(target).offsetTop;
+// }

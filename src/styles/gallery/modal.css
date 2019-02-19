@@ -53,6 +53,9 @@
   margin-bottom: .3rem;
   z-index: 1;
 }
+.modal-nav__mini:focus {
+  outline: none;
+}
 
 .modal-nav__mini-link {
   display: flex;
@@ -96,22 +99,26 @@
 }
 
 .gallery-modal__close-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 1.8rem;
+  height: 100%;
   width: 1.8rem;
   position: fixed;
   top: 0;
   right: 0;
   z-index: 15;
-  font-size: 1.5rem;
+  padding-top: 0.5rem;
   border: none;
   background-color: transparent;
   cursor: pointer;
 }
-.gallery-modal__close-btn:hover {
-  background-color: rgb(59, 41, 41);
+.gallery-modal__close-btn-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.gallery-modal__close-btn:hover polygon {
+  fill: #ff3f40;
 }
 
 .gallery-modal__switch-btn {
@@ -123,9 +130,6 @@
   z-index: 15;
   border: none;
   background-color: transparent;
-  color: rgb(230, 247, 255);
-  font-size: 2rem;
-  font-weight: bold;
 }
 
 .gallery-modal__switch-btn:hover polygon,
@@ -151,4 +155,19 @@
 .gallery-modal__switch-btn:focus {
   display: flex;
   outline: none;
+}
+
+.modal-field ::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+
+.modal-field ::-webkit-scrollbar-track {
+  /* border-radius: 10px; */
+  background-color: rgb(230, 247, 255);
+}
+
+.modal-field ::-webkit-scrollbar-thumb {
+  /* border-radius: 10px; */
+  background-color: #ff3f40;
 }
