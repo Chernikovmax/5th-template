@@ -11,6 +11,7 @@ const prevBtn = document.querySelector('#prev-btn');
 const nextBtn = document.querySelector('#next-btn');
 
 const toggleModal = () => {
+  document.querySelector('body').classList.toggle('body-scroll');
   if (document.querySelector('.modal-nav__picture') !== null) {
     document.querySelector('.modal-nav__picture').remove();
   }
@@ -35,7 +36,7 @@ const openCertainModal = (index) => {
   image.setAttribute('alt', 'Some mountain');
   image.setAttribute('src', `./media/imgs/mountains/${index}_mountain.jpg`);
 
-  modalImage.insertBefore(image, nextBtn);
+  modalImage.appendChild(image);
 };
 global.openCertainModal = openCertainModal;
 

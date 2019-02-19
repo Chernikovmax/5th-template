@@ -24,8 +24,8 @@
 .modal-nav__wrapper {
   display: flex;
   position: fixed;
-  width: 98vw;
-  height: 98vh;
+  width: 100vw;
+  height: 100vh;
   top: 1vh;
   left: 1vw;
   z-index: 11;
@@ -33,9 +33,9 @@
 
 .modal-nav {
   position: fixed;
-  right:0;
+  right: 1.8rem;
   height: 98vh;
-  width: 220px;
+  width: 210px;
   padding-left: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -90,7 +90,7 @@
 
 .modal-nav__picture {
   position: relative;
-  width: 90%;
+  max-width: 98%;
   height: auto;
   max-height: 100%;
 }
@@ -99,9 +99,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 2.2rem;
-  width: 2.2rem;
-  position: absolute;
+  height: 1.8rem;
+  width: 1.8rem;
+  position: fixed;
   top: 0;
   right: 0;
   z-index: 15;
@@ -119,27 +119,36 @@
   align-items: center;
   width: 50%;
   height: 100%;
+  position: absolute;
+  z-index: 15;
   border: none;
   background-color: transparent;
   color: rgb(230, 247, 255);
   font-size: 2rem;
   font-weight: bold;
 }
+
+.gallery-modal__switch-btn:hover polygon,
+.gallery-modal__switch-btn:hover path,
+.gallery-modal__switch-btn:focus polygon,
+.gallery-modal__switch-btn:focus path {
+  fill: #ff3f40;
+}
 .gallery-modal__switch-btn:first-of-type {
   padding-left: 0.2rem;
-  text-align: left;
+  justify-content: flex-start;
+  left: 0;
 }
 .gallery-modal__switch-btn:last-of-type {
   padding-right: 0.2rem;
-  text-align: right;
+  justify-content: flex-end;
+  right: 0;
 }
 
 .gallery-modal__switch-btn:hover {
-  background-color: rgb(0, 0, 0);
+  display: flex;
 }
 .gallery-modal__switch-btn:focus {
+  display: flex;
   outline: none;
-  background-color: rgba(0, 0, 0, 0.7);
-  /* border: 1px solid red;
-  outline: 0; */
 }
