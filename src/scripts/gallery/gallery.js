@@ -1,11 +1,18 @@
 import '../../styles/gallery/gallery.css';
-//
-// import './feature-products-gallery.js';
+const imagesQuantity = 30;
+const pictureMiniatures = [];
+
+(() => {
+  for (let i = 0; i < imagesQuantity; i++) {
+    pictureMiniatures.push(`<img src="./media/imgs/mountains/minis/${i}_mountain.jpg" alt="Some mountain" class="modal-nav__mini-pic">`);
+  }
+})();
+
 let currentImage;
-const picsQuantity = document.querySelectorAll('.gallery__item').length;
 
 const modal = document.querySelector('#gallery-modal');
 const modalImage = document.querySelector('.modal-nav__image');
+const modalMiniatureField = document.querySelector('.modal-nav');
 
 const prevBtn = document.querySelector('#prev-btn');
 const nextBtn = document.querySelector('#next-btn');
@@ -19,17 +26,32 @@ const toggleModal = () => {
 };
   document.querySelector('#close-btn').addEventListener('click', toggleModal);
 
-
-const clearClassOnClose = () => {
+const clearModalOnClose = () => {
   document.querySelector('.modal-nav__mini-active').classList.remove('modal-nav__mini-active');
+  modalMiniatureField.innerHTML = '';
 };
-  document.querySelector('#close-btn').addEventListener('click', clearClassOnClose);
+  document.querySelector('#close-btn').addEventListener('click', clearModalOnClose);
 
+const renderMiniatures = (arr) => {
+  arr.forEach((item) => {
+
+    let out = `<a onclick="setPicture(0)" class="modal-nav__mini-link">
+                  ${item}
+              </a>`;
+    const miniature = document.createElement('li');
+    miniature.setAttribute('tabIndex', '1');
+    miniature.classList.add('modal-nav__mini');
+    miniature.innerHTML = out;
+
+    modalMiniatureField.appendChild(miniature);
+  });
+};
 
 const openCertainModal = (index) => {
+  renderMiniatures(pictureMiniatures);
   document.querySelectorAll('.modal-nav__mini')[index].classList.add('modal-nav__mini-active');
   toggleModal();
-  document.querySelectorAll('.modal-nav__mini')[index].focus();
+  document.querySelector('.modal-nav__mini-active').focus();
   currentImage = index;
 
   const image = document.createElement('img');
@@ -66,43 +88,17 @@ const prevPic = () => {
   if ((currentImage-1) > 0) {
     setPicture(currentImage-1);
   } else {
-      setPicture(picsQuantity-1);
+      setPicture(imagesQuantity-1);
     }
 };
 prevBtn.addEventListener('click', prevPic);
 
 
 const nextPic = () => {
-  if ((currentImage+1) < picsQuantity) {
+  if ((currentImage+1) < imagesQuantity) {
     setPicture(currentImage+1);
   } else {
       setPicture(0);
     }
 };
 nextBtn.addEventListener('click', nextPic);
-
-//
-// // Scroll To Element Smothy with Vanilla JavaScript
-// let offset = 0;
-// let call;
-// function scroll() {
-//   if ((offset - document.documentElement.scrollTop) > 0) {
-//     document.documentElement.scrollTop += 10;
-//   }
-//   else if ((offset - document.documentElement.scrollTop) < 0) {
-//     document.documentElement.scrollTop -= 10;
-//   }
-//   else {
-//       clearInterval(call);
-//   }
-// }
-// // Add Event Listener to parent Element
-// document.querySelectorAll('.modal-nav').addEventListener("click", replyClick);
-//
-// //CallBack Function
-// function replyClick(e) {
-//   e.preventDefault();
-//   call = setInterval(scroll, 10);
-//   target = e.srcElement.dataset.scroll;
-//   offset = document.getElementById(target).offsetTop;
-// }
