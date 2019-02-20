@@ -3,6 +3,7 @@ const IMAGE_QUANTITY = 30;
 const pictureMiniatures = [];
 const galleryPictureMiniatures = [];
 
+ // Code below automatically fills up the arrays by <img> tags.
 (() => {
   for (let i = 0; i < IMAGE_QUANTITY; i++) {
     pictureMiniatures.push(`<img src="./media/imgs/mountains/minis/${i}_mountain.jpg" alt="Some mountain" class="modal-nav__mini-pic">`);
@@ -10,6 +11,7 @@ const galleryPictureMiniatures = [];
   }
 })();
 
+ // Code below automatically renders the images on gallery page.
 ((arr) => {
   arr.forEach((item, index) => {
 
@@ -26,14 +28,12 @@ const galleryPictureMiniatures = [];
 
 })(galleryPictureMiniatures);
 
-let currentImage;
+let currentImage; //This variable will contain the information about rendered image for style management when switching.
 
 const modal = document.querySelector('#gallery-modal');
 const modalImage = document.querySelector('.modal-nav__image');
 const modalMiniatureField = document.querySelector('.modal-nav');
 
-const prevBtn = document.querySelector('#prev-btn');
-const nextBtn = document.querySelector('#next-btn');
 
 const toggleModal = () => {
   document.querySelector('body').classList.toggle('body-scroll');
@@ -42,13 +42,33 @@ const toggleModal = () => {
   }
   modal.classList.toggle('modal-active');
 };
-  document.querySelector('#close-btn').addEventListener('click', toggleModal);
+document.querySelector('#close-btn').addEventListener('click', toggleModal);
+
+//Code below allows closing modalbox by pressing "Esc" key on keyboard
+modal.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    toggleModal();
+    return clearModalOnClose();
+  }
+});
+
+//Code below allows switching images in modalbox by pressing keyboard's left/right keys
+modal.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowLeft') {
+    return prevPic();
+  } else
+    if (event.key === 'ArrowRight') {
+      return nextPic();
+    }
+});
+
 
 const clearModalOnClose = () => {
   document.querySelector('.modal-nav__mini-active').classList.remove('modal-nav__mini-active');
   modalMiniatureField.innerHTML = '';
 };
-  document.querySelector('#close-btn').addEventListener('click', clearModalOnClose);
+document.querySelector('#close-btn').addEventListener('click', clearModalOnClose);
+
 
 const renderMiniatures = (arr) => {
   arr.forEach((item, index) => {
@@ -64,6 +84,7 @@ const renderMiniatures = (arr) => {
     modalMiniatureField.appendChild(miniature);
   });
 };
+
 
 const openCertainModal = (index) => {
   renderMiniatures(pictureMiniatures);
@@ -81,6 +102,7 @@ const openCertainModal = (index) => {
 };
 global.openCertainModal = openCertainModal;
 
+
 const setPicture = (index) => {
   activateMiniPic(index);
   document.querySelector('.modal-nav__picture').remove();
@@ -94,6 +116,8 @@ const setPicture = (index) => {
 };
 global.setPicture = setPicture;
 
+
+//Code below highlights image miniatures in modalbox
 const activateMiniPic = (index) => {
   const miniPics = document.querySelectorAll('.modal-nav__mini');
   miniPics[currentImage].classList.remove('modal-nav__mini-active');
@@ -109,8 +133,7 @@ const prevPic = () => {
       setPicture(IMAGE_QUANTITY-1);
     }
 };
-prevBtn.addEventListener('click', prevPic);
-
+document.querySelector('#prev-btn').addEventListener('click', prevPic);
 
 const nextPic = () => {
   if ((currentImage+1) < IMAGE_QUANTITY) {
@@ -119,4 +142,4 @@ const nextPic = () => {
       setPicture(0);
     }
 };
-nextBtn.addEventListener('click', nextPic);
+document.querySelector('#next-btn').addEventListener('click', nextPic);
