@@ -112,7 +112,7 @@ const setPicture = (index) => {
   image.setAttribute('alt', 'Some mountain');
   image.setAttribute('src', `./media/imgs/mountains/${index}_mountain.jpg`);
 
-  modalImage.insertBefore(image, nextBtn);
+  modalImage.appendChild(image);
 };
 global.setPicture = setPicture;
 
