@@ -1,12 +1,30 @@
 import '../../styles/gallery/gallery.css';
-const imagesQuantity = 30;
+const IMAGE_QUANTITY = 30;
 const pictureMiniatures = [];
+const galleryPictureMiniatures = [];
 
 (() => {
-  for (let i = 0; i < imagesQuantity; i++) {
+  for (let i = 0; i < IMAGE_QUANTITY; i++) {
     pictureMiniatures.push(`<img src="./media/imgs/mountains/minis/${i}_mountain.jpg" alt="Some mountain" class="modal-nav__mini-pic">`);
+    galleryPictureMiniatures.push(`<img src="./media/imgs/mountains/minis/${i}_mountain.jpg" alt="Some mountain" class="gallery__item-pic">`);
   }
 })();
+
+((arr) => {
+  arr.forEach((item, index) => {
+
+    let out = `<a onclick="openCertainModal(${index})" class="gallery__item-link">
+                  ${item}
+              </a>`;
+    const galleryMiniature = document.createElement('li');
+    galleryMiniature.classList.add('gallery__item');
+    galleryMiniature.innerHTML = out;
+
+    const gallery = document.querySelector('.gallery');
+    gallery.appendChild(galleryMiniature);
+  });
+
+})(galleryPictureMiniatures);
 
 let currentImage;
 
@@ -33,9 +51,9 @@ const clearModalOnClose = () => {
   document.querySelector('#close-btn').addEventListener('click', clearModalOnClose);
 
 const renderMiniatures = (arr) => {
-  arr.forEach((item) => {
+  arr.forEach((item, index) => {
 
-    let out = `<a onclick="setPicture(0)" class="modal-nav__mini-link">
+    let out = `<a onclick="setPicture(${index})" class="modal-nav__mini-link">
                   ${item}
               </a>`;
     const miniature = document.createElement('li');
@@ -88,14 +106,14 @@ const prevPic = () => {
   if ((currentImage-1) > 0) {
     setPicture(currentImage-1);
   } else {
-      setPicture(imagesQuantity-1);
+      setPicture(IMAGE_QUANTITY-1);
     }
 };
 prevBtn.addEventListener('click', prevPic);
 
 
 const nextPic = () => {
-  if ((currentImage+1) < imagesQuantity) {
+  if ((currentImage+1) < IMAGE_QUANTITY) {
     setPicture(currentImage+1);
   } else {
       setPicture(0);
