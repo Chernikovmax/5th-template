@@ -127,7 +127,7 @@
   width: 50%;
   height: 100%;
   position: absolute;
-  z-index: 15;
+  z-index: 14;
   border: none;
   background-color: transparent;
 }
@@ -170,4 +170,44 @@
 .modal-field ::-webkit-scrollbar-thumb {
   /* border-radius: 10px; */
   background-color: #ff3f40;
+}
+
+@media screen and (max-width: 1080px) {
+  .gallery-modal__switch-btn polygon,
+  .gallery-modal__switch-btn path,
+  .gallery-modal__switch-btn polygon,
+  .gallery-modal__switch-btn path {
+    fill: #ff3f40;
+    opacity: 0.6;
+  }
+
+  .gallery-modal__close-btn {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .gallery-modal__close-btn polygon {
+    fill: #ff3f40;
+  }
+
+  .modal-nav {
+    flex-direction: row;
+    bottom:0;
+    height: 7.7rem;
+    width: calc(100% - 1.8rem);
+  }
+
+  .modal-nav__mini {
+    margin: 0 0.3rem;
+  }
+
+  .modal-nav__image {
+    height: calc(100% - 8.3rem);
+    width: 100%;
+  }
+
+  .modal-nav__wrapper {
+    top: 0;
+    left: 0;
+  }
 }
