@@ -1,5 +1,7 @@
 import '../styles/index.css';
 
+import './header-menu.js';
+
 import './feature-products-gallery.js';
 
 import './comments.js';

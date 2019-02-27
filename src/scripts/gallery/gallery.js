@@ -1,4 +1,7 @@
 import '../../styles/gallery/gallery.css';
+
+import '../header-menu.js';
+
 const IMAGE_QUANTITY = 30;
 const pictureMiniatures = [];
 const galleryPictureMiniatures = [];

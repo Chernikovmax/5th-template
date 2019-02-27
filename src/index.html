@@ -9,10 +9,10 @@
 </head>
 <body>
 
-  <header class="header-container">
-    <ul class="header-menu">
+  <header id="main-menu" class="header-container">
+    <ul id="main-menu-list" class="header-menu">
       <li class="header-menu__item header-menu__item--active">
-        <a class="header-menu__link" href="#">HOME</a>
+        <a class="header-menu__link" href="/index.html">HOME</a>
       </li>
       <li class="header-menu__item">
         <a class="header-menu__link" href="/gallery.html">GALLERY</a>
@@ -24,6 +24,15 @@
         <a class="header-menu__link" href="#">JOY</a>
       </li>
     </ul>
+    <button id="burger-menu" class="header-container__burger-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 24 24">
+        <g>
+          <path d="M24,3c0-0.6-0.4-1-1-1H1C0.4,2,0,2.4,0,3v2c0,0.6,0.4,1,1,1h22c0.6,0,1-0.4,1-1V3z"/>
+          <path d="M24,11c0-0.6-0.4-1-1-1H1c-0.6,0-1,0.4-1,1v2c0,0.6,0.4,1,1,1h22c0.6,0,1-0.4,1-1V11z"/>
+          <path d="M24,19c0-0.6-0.4-1-1-1H1c-0.6,0-1,0.4-1,1v2c0,0.6,0.4,1,1,1h22c0.6,0,1-0.4,1-1V19z"/>
+        </g>
+      </svg>
+    </button>
   </header>
 
   <main class="main-field">
