@@ -3,7 +3,8 @@
   justify-content: center;
   width: 100%;
   min-height: calc(100vh - 9rem);
-  background-color: rgb(255, 252, 233);
+  background-color: #f6f2f2;
+  /* background-color: rgb(255, 252, 233); */
 }
 
 .gallery {
