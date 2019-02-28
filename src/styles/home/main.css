@@ -87,8 +87,6 @@
   width: 2rem;
   background-color: inherit;
   border: none;
-  font-size: 1rem;
-  margin-bottom: 0.3rem;
   cursor: pointer;
 }
 .slide-switches__playback:hover {
@@ -96,33 +94,31 @@
 }
 
 .slide-switches__prev {
+  width: 2rem;
   height: 2rem;
   background-color: inherit;
   border: none;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 0.3rem;
   cursor: pointer;
-  color: #ff2d2d;
+}
+.slide-switches__prev svg {
+  fill: #ff2d2d;
+}
+.slide-switches__prev:hover svg {
+  fill: #e87b7b;
 }
 
 .slide-switches__next {
+  width: 2rem;
   height: 2rem;
   background-color: inherit;
   border: none;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 0.3rem;
   cursor: pointer;
-  color: #ff2d2d;
 }
-
-.slide-switches__prev:hover {
-  color: #ffa800;
+.slide-switches__next svg {
+  fill: #ff2d2d;
 }
-
-.slide-switches__next:hover {
-  color: #ffa800;
+.slide-switches__next:hover svg {
+  fill: #e87b7b;
 }
 
 .slide-switches__dot {

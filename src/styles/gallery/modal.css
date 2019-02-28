@@ -157,21 +157,6 @@
   outline: none;
 }
 
-.modal-field ::-webkit-scrollbar {
-  width: 12px;
-  background-color: transparent;
-}
-
-.modal-field ::-webkit-scrollbar-track {
-  /* border-radius: 10px; */
-  background-color: rgb(230, 247, 255);
-}
-
-.modal-field ::-webkit-scrollbar-thumb {
-  /* border-radius: 10px; */
-  background-color: #ff3f40;
-}
-
 @media screen and (max-width: 1080px) {
   .gallery-modal__switch-btn polygon,
   .gallery-modal__switch-btn path,

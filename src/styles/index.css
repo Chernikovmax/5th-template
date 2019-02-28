@@ -30,6 +30,20 @@ p {
   opacity: 0.7;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(230, 247, 255);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ff3f40;
+}
+
+
 @media screen and (max-width: 1080px) {
   .slide__body-title {
     height: 100px;
