@@ -1,0 +1,163 @@
+.main-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slides {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 100px;
+  height: 460px;
+  width: 65%;
+}
+
+.slide {
+  position: relative;
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.slide__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.slide__body-title {
+  height: 100px;
+  font-size: 65px;
+  font-weight: 1000;
+  line-height: 4rem;
+}
+
+.slide__body-description {
+  margin-right: 10%;
+  margin-top: 3rem;
+  line-height: 24px;
+}
+
+.slide__contact-btn {
+  position: absolute;
+  bottom: 15%;
+  text-align: center;
+  padding-top: 13px;
+  padding-bottom: 15px;
+  width: 227px;
+  height: 20px;
+  border-radius: 5px;
+  background-color: #ff2d2d;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.slide-image {
+  width: auto;
+  height: 300px;
+}
+
+.slide-switches {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 45%;
+  right: 55%;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  width: 200px;
+}
+
+.slide-switches__playback {
+  height: 2rem;
+  width: 2rem;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+.slide-switches__playback:hover {
+  color: #e87b7b;
+}
+
+.slide-switches__prev {
+  width: 2rem;
+  height: 2rem;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+.slide-switches__prev svg {
+  fill: #ff2d2d;
+}
+.slide-switches__prev:hover svg {
+  fill: #e87b7b;
+}
+
+.slide-switches__next {
+  width: 2rem;
+  height: 2rem;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+.slide-switches__next svg {
+  fill: #ff2d2d;
+}
+.slide-switches__next:hover svg {
+  fill: #e87b7b;
+}
+
+.slide-switches__dot {
+  height: 20px;
+  width: 20px;
+  border: none;
+  border-radius: 50%;
+  background-color: #000000;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.slide-switches__dot:hover {
+  background-color: #e87b7b;
+}
+
+@keyframes fadeIn {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: flex;
+        opacity: 0;
+    }
+
+    100% {
+        display: flex;
+        opacity: 1;
+    }
+}
+
+.slide--active {
+  display: flex;
+  -webkit-animation: fadeIn 0.5s;
+  -moz-animation: fadeIn 0.5s;
+  -o-animation: fadeIn 0.5s;
+  animation: fadeIn 0.5s;
+}
+.slide-switches__dot--active {
+  background-color: #ff2d2d;
+}

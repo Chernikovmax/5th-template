@@ -1,0 +1,67 @@
+.main-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 9rem);
+}
+
+.gaming-message {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  height: 2.2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+.gaming-message > svg {
+  margin-right: 0.5rem;
+}
+
+.game-field {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: rgb(170, 96, 10);
+  border: 5px solid rgb(170, 96, 10);
+  width: 450px;
+  height: 450px;
+}
+
+.game-field__cell {
+  width: 150px;
+  height: 150px;
+  border: 2.5px solid rgb(170, 96, 10);
+  background-color: rgb(245, 227, 182);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.victory-cell {
+  background-color: #00ff7f;
+}
+
+.game-field__cell:hover {
+  background-color: #fff;
+}
+
+.symbol {
+  width: auto;
+  height: 100%;
+}
+
+.clear-field {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff3f40;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+.clear-field:hover {
+  background-color: #e86464;
+}

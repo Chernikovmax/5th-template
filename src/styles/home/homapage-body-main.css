@@ -1,0 +1,148 @@
+/* 2 part of Homepage */
+
+.info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 660px;
+  width: 1300px;
+}
+
+.common-info {
+  width: 40%;
+  margin: 7% 2% 7% 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.regular-title {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 55px;
+  margin-bottom: 2%;
+}
+
+.common-info-learn {
+  text-align: center;
+  color: #ff2d2d;
+  font-size: 18px;
+  font-weight: 700;
+  width: 227px;
+  height: 30px;
+  padding-top: 14px;
+  padding-bottom: 11px;
+  margin-top: 30px;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid #ff0000;
+}
+
+.info-container__about-company {
+  margin: 7% 0% 7% 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+}
+
+.info-container__about-company-item {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  margin-left: 5%;
+}
+
+.about-company-item__title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 1.2rem;
+}
+.dividing-line {
+  width: 80%;
+  height: 2px;
+  background-color: #ececec;
+  border: none;
+}
+
+
+/* Feature products - section */
+
+.feature-products {
+  width: 80%;
+  height: auto;
+}
+
+.feature-products__title-field {
+  margin-top: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-products__title-field-description {
+  text-align: center;
+}
+
+.regular-red-underscore {
+  margin-top: 1%;
+  margin-bottom: 3%;
+  margin-left: 0;
+  margin-right: 0;
+  width: 132px;
+  height: 3px;
+  background-color: #ff2d2d;
+  border: none;
+}
+
+.feature-products__menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.feature-products__menu-item {
+  margin-right:28px;
+  margin-left:28px;
+}
+.feature-products__menu-item:hover {
+  color: #ff2d2d;
+}
+.feature-products__menu-item--active {
+  color: #ff2d2d;
+  opacity: 1;
+}
+
+.feature-products__slide {
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.feature-products__slide--active {
+  display: flex;
+}
+
+.feature-products__slide-img {
+  display: block;
+  position: relative;
+  margin-left: 20px;
+  margin-right: 20px;
+  z-index: 1;
+  transition: all .3s;
+}
+.feature-products__slide-img:first-of-type {
+  width: 30%;
+  height: auto;
+}
+.feature-products__slide-img:last-of-type {
+  width: 60%;
+  height: auto;
+}
+
+.feature-products__slide-img:hover {
+  z-index: 5;
+  transform: scale(1.4);
+}

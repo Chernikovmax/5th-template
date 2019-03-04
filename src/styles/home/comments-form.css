@@ -1,0 +1,80 @@
+.comments-field {
+  display: none;
+  flex-direction: column;
+  width: 80%;
+  margin-left: 0;
+  height: auto;
+}
+
+.comments-field--active {
+  display: flex;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction:column;
+}
+
+.comment-form__name {
+  border: 1px solid #ff2d2d;
+  border-radius: 5px;
+  height: 25px;
+  width: 25%;
+  font-size: 18px;
+  padding-left: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.comment-form__email {
+  border: 1px solid #ff2d2d;
+  border-radius: 5px;
+  height: 25px;
+  width: 35%;
+  font-size: 18px;
+  padding-left: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.comment-form__wrapper {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.comment-form__textfield {
+  outline: none;
+  border: 1px solid #ff2d2d;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  height: 82px;
+  width: 89%;
+  font-size: 18px;
+  padding-left: 20px;
+}
+
+.comment-form__send-btn {
+  display: none;
+  text-align: center;
+  padding: 13px 10px 11px 10px;
+  height: 86px;
+  border-radius: 0 5px 5px 0;
+  background-color: #ff2d2d;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  width: 11%;
+  cursor: pointer;
+}
+.comment-form__send-btn__send-btn:hover {
+  background-color: #f41a1a;
+  font-size: 22px;
+}
+
+.comment-form__send-btn--active {
+  display: block;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+}
