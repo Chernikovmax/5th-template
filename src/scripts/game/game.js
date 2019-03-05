@@ -3,15 +3,10 @@ import '../header-menu.js';
 
 const gamingMessage = document.querySelector('.gaming-message');
 const gameField = document.querySelector('.game-field');
-document.querySelector('.clear-field').addEventListener('click', () => {
-  const cells = document.querySelectorAll('.game-field__cell');
-
-  for (let i = 0; i < cells.length; i++) {
-    cells[i].innerHTML = '';
-  }
-});
+document.querySelector('.clear-field').addEventListener('click', clearGame);
 
 let moves = 0;
+global.moves = moves;
 
 const cross =
 `<svg class="symbol" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 80 80">
@@ -48,6 +43,8 @@ const circle =
   return;
 })(9);
 
+const cells = document.querySelectorAll('.game-field__cell');
+
 const winCombinations = [
     [1, 2, 3],
     [4, 5, 6],
@@ -59,28 +56,90 @@ const winCombinations = [
     [3, 5, 7],
 ];
 
-let player = cross;
+let dataX = [],
+    dataO = [],
+    winningCells = [];
+global.dataX = dataX;
+global.dataO = dataO;
+
+
+let player = cross,
+    winner;
+
 
 gameField.addEventListener('click', game_3x3_humans);
 
 function game_3x3_humans(event) {
-
-  if (event.target.className === 'game-field__cell') {
+  const value = parseInt(event.target.getAttribute('data-value'), 10);
+  if (event.target.className === 'game-field__cell' && event.target.innerHTML === "") {
     event.target.innerHTML = player;
-    changePlayer();
-    checkTheWinner()
+    moves++;
+    changePlayer(value);
+    if (moves === 9 && winner === undefined) {
+      gamingMessage.innerHTML = 'DRAWN GAME!';
+      moves = 0;
+      return;
+    }
   }
 }
 
-function changePlayer() {
+function changePlayer(value) {
+  (player === cross) ?  dataX.push(value) :  dataO.push(value);
+  (player === cross) ?  checkTheWinner(dataX, value) :  checkTheWinner(dataO, value);
+
+  if (winner !== undefined) {return;}
   player === cross ? (player = circle) : (player = cross);
   gamingMessage.innerHTML = `${player} PLAYER'S MOVE`;
-  moves++;
 }
 
-function checkTheWinner() {
-  if (moves === 9) {
-    gamingMessage.innerHTML = 'DRAW!';
-    moves = 0;
+function checkTheWinner(arr, currentCell) {
+  if (arr.length > 2) {
+    let count = 0;
+    for (let i = 0; i < winCombinations.length; i++) {
+      if (winCombinations[i].indexOf(currentCell) !== -1) {
+        let winCombination = winCombinations[i];
+
+        for (let j = 0; j < winCombination.length; j++) {
+          if (arr.indexOf(winCombination[j]) !== -1) {
+            winningCells.push(arr[arr.indexOf(winCombination[j])] -1);
+            console.log(winningCells);
+            count++;
+          }
+          if (count === 3) {
+            winner = player;
+            for (let w = 0; w < winningCells.length; w++) {
+              cells[winningCells[w]].classList.add('victory-cell');
+            }
+            gamingMessage.innerHTML = `THE WINNER IS PLAYER - ${player}`;
+            gameField.removeEventListener('click', game_3x3_humans);
+            return;
+          }
+          continue;
+        }
+        count = 0;
+        winningCells = [];
+      }
+
+    }
+  } else return;
+}
+
+function clearGame() {
+  player = cross;
+  dataO = [];
+  dataX = [];
+  moves = 0;
+  gamingMessage.innerHTML = `${player} PLAYER'S MOVE`;
+
+  if (winner !== undefined) {
+    for (let w = 0; w < winningCells.length; w++) {
+      cells[winningCells[w]].classList.remove('victory-cell');
+    }
   }
+  winner = undefined;
+  for (let i = 0; i < cells.length; i++) {
+    cells[i].innerHTML = '';
+  }
+  gameField.addEventListener('click', game_3x3_humans);
+  console.log(dataO, dataX, winningCells);
 }
