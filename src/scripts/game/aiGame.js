@@ -153,5 +153,3 @@ function clearGame() {
   }
   gameField.addEventListener('click', game_3x3_withAi);
 }
-
-console.log(emptyIndices(board));
