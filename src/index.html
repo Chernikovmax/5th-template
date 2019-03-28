@@ -9,12 +9,31 @@
 </head>
 <body>
 
-  <header class="header-container">
-    <ul class="header-menu">
-      <li class="header-menu__item header-menu__item--active"><a href="#">HOME</a></li>
-      <li class="header-menu__item"><a href="#">GALLERY</a></li>
-      <li class="header-menu__item"><a href="#">POSTS</a></li>
+  <header id="main-menu" class="header-container">
+    <ul id="main-menu-list" class="header-menu">
+      <li class="header-menu__item header-menu__item--active">
+        <a class="header-menu__link" href="/index.html">HOME</a>
+      </li>
+      <li class="header-menu__item">
+        <a class="header-menu__link" href="/gallery.html">GALLERY</a>
+      </li>
+      <li class="header-menu__item">
+        <a class="header-menu__link" href="#">POSTS</a>
+      </li>
+      <li class="header-menu__item">
+        <a class="header-menu__link" href="/game.html">GAME</a>
+      </li>
     </ul>
+    <button id="burger-menu" class="header-container__burger-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xmlns:xlink="http://www.w3.org/1999/xlink"
+      enable-background="new 0 0 24 24">
+        <g>
+          <path d="M24,3c0-0.6-0.4-1-1-1H1C0.4,2,0,2.4,0,3v2c0,0.6,0.4,1,1,1h22c0.6,0,1-0.4,1-1V3z"/>
+          <path d="M24,11c0-0.6-0.4-1-1-1H1c-0.6,0-1,0.4-1,1v2c0,0.6,0.4,1,1,1h22c0.6,0,1-0.4,1-1V11z"/>
+          <path d="M24,19c0-0.6-0.4-1-1-1H1c-0.6,0-1,0.4-1,1v2c0,0.6,0.4,1,1,1h22c0.6,0,1-0.4,1-1V19z"/>
+        </g>
+      </svg>
+    </button>
   </header>
 
   <main class="main-field">
@@ -30,7 +49,7 @@
               adig ipis cing elit, sed do eiusmod tempor incididunt.
             </p>
           </section>
-          <img src="../src/imgs/car-1.jpg" alt="Red classic car" class="slide-image">
+          <img src="./media/imgs/car-1.jpg" alt="Red classic car" class="slide-image">
         </section>
 
         <section class="slide">
@@ -43,7 +62,7 @@
               adig ipis cing elit, sed do eiusmod tempor incididunt.
             </p>
           </section>
-          <img src="../src/imgs/car-2.jpg" alt="Red classic Mercedes" class="slide-image">
+          <img src="./media/imgs/car-2.jpg" alt="Red classic Mercedes" class="slide-image">
         </section>
 
         <section class="slide">
@@ -57,7 +76,7 @@
               adig ipis cing elit, sed do eiusmod tempor incididunt.
             </p>
           </section>
-          <img src="../src/imgs/car-3.jpg" alt="Bronze classic Mustang" class="slide-image">
+          <img src="./media/imgs/car-3.jpg" alt="Bronze classic Mustang" class="slide-image">
         </section>
 
         <section class="slide">
@@ -69,19 +88,45 @@
               adig ipis cing elit, sed do eiusmod tempor incididunt.
             </p>
           </section>
-          <img src="../src/imgs/car-4.jpg" alt="Cclassic car" class="slide-image">
+          <img src="./media/imgs/car-4.jpg" alt="Cclassic car" class="slide-image">
         </section>
 
-        <a href="#" class="slide__contact-btn">Contact Us</a>
+        <a href="#contact-field" class="slide__contact-btn">Contact Us</a>
 
         <section class="slide-switches">
-          <button class="slide-switches__playback" onclick="playbackSwitcher()">&#9612;&#9612;</button>
-          <button class="slide-switches__prev" onclick="setPrevSlide()"><</button>
+          <button class="slide-switches__playback" onclick="playbackSwitcher()">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0"
+            	 viewBox="0 0 47.607 47.607" xml:space="preserve">
+            	<g>
+            		<path d="M17.991,40.976c0,3.662-2.969,6.631-6.631,6.631l0,0c-3.662,0-6.631-2.969-6.631-6.631V6.631C4.729,2.969,7.698,0,11.36,0
+            			l0,0c3.662,0,6.631,2.969,6.631,6.631V40.976z"/>
+            		<path d="M42.877,40.976c0,3.662-2.969,6.631-6.631,6.631l0,0c-3.662,0-6.631-2.969-6.631-6.631V6.631
+            			C29.616,2.969,32.585,0,36.246,0l0,0c3.662,0,6.631,2.969,6.631,6.631V40.976z"/>
+            	</g>
+            </svg>
+          </button>
+          <button class="slide-switches__prev" onclick="setPrevSlide()">
+            <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 199.404 199.404">
+              <g>
+                <polygon
+                  points="135.412,0 35.709,99.702 135.412,199.404 163.695,171.119 92.277,99.702 163.695,28.285"
+                />
+              </g>
+            </svg>
+          </button>
           <button class="slide-switches__dot" onclick="setSlide(0)"></button>
           <button class="slide-switches__dot" onclick="setSlide(1)"></button>
           <button class="slide-switches__dot" onclick="setSlide(2)"></button>
           <button class="slide-switches__dot" onclick="setSlide(3)"></button>
-          <button class="slide-switches__next" onclick="setNextSlide()">></button>
+          <button class="slide-switches__next" onclick="setNextSlide()">
+            <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 199.404 199.404">
+              <g>
+                <path
+                  stroke-width="1"
+                  d="M 72.166382,200.23909 169.42597,98.153095 67.339973,0.89350861 39.748265,29.854428 112.88307,99.52207 43.205463,172.64738 Z"/>
+              </g>
+            </svg>
+          </button>
         </section>
 
       </section>
@@ -164,28 +209,28 @@
       </ul>
       <ul class="feature-products__slideshow">
         <li class="feature-products__slide feature-products__slide--active">
-          <img class="feature-products__slide-img" src="../src/imgs/presentation/1.jpeg" alt="">
-          <img class="feature-products__slide-img" src="../src/imgs/presentation/2.jpeg" alt="">
+          <img class="feature-products__slide-img" src="./media/imgs/presentation/1.jpg" alt="">
+          <img class="feature-products__slide-img" src="./media/imgs/presentation/2.jpg" alt="">
         </li>
 
         <li class="feature-products__slide">
-          <img class="feature-products__slide-img" src="../src/imgs/presentation/3.jpeg" alt="">
-          <img class="feature-products__slide-img" src="../src/imgs/presentation/4.jpeg" alt="">
+          <img class="feature-products__slide-img" src="./media/imgs/presentation/3.jpg" alt="">
+          <img class="feature-products__slide-img" src="./media/imgs/presentation/4.jpg" alt="">
         </li>
 
         <li class="feature-products__slide">
-          <img class="feature-products__slide-img" src="../src/imgs/presentation/5.jpeg" alt="">
-          <img class="feature-products__slide-img" src="../src/imgs/presentation/6.jpeg" alt="">
+          <img class="feature-products__slide-img" src="./media/imgs/presentation/5.jpg" alt="">
+          <img class="feature-products__slide-img" src="./media/imgs/presentation/6.jpg" alt="">
         </li>
 
         <li class="feature-products__slide">
-          <img class="feature-products__slide-img" src="../src/imgs/presentation/7.jpeg" alt="">
-          <img class="feature-products__slide-img" src="../src/imgs/presentation/8.jpeg" alt="">
+          <img class="feature-products__slide-img" src="./media/imgs/presentation/7.jpg" alt="">
+          <img class="feature-products__slide-img" src="./media/imgs/presentation/8.jpg" alt="">
         </li>
 
         <li class="feature-products__slide">
-          <img class="feature-products__slide-img" src="../src/imgs/presentation/9.jpeg" alt="">
-          <img class="feature-products__slide-img" src="../src/imgs/presentation/10.jpeg" alt="">
+          <img class="feature-products__slide-img" src="./media/imgs/presentation/9.jpg" alt="">
+          <img class="feature-products__slide-img" src="./media/imgs/presentation/10.jpg" alt="">
         </li>
       </ul>
     </div>
@@ -199,11 +244,16 @@
 
         <form name="comment-form" class="comment-form">
           <a name="anchor-subcomment"></a>
-          <input required class="comment-form__name" type="text" name="commentator-name" id="comment-input-name" maxlength="50" placeholder="your name">
-          <input required class="comment-form__email" type="email" name="commentator-email" maxlength="100" placeholder="your email (example@email.com)">
+          <input required class="comment-form__name" type="text" name="commentator-name" id="comment-input-name"
+          maxlength="50" placeholder="your name">
+          <input required class="comment-form__email" type="email" name="commentator-email" maxlength="100"
+          placeholder="your email (example@email.com)">
           <section class="comment-form__wrapper">
-            <input required type="text" class="comment-form__textfield" name="comment-text" maxlength="2000" placeholder="put your comment here" cols="40" rows="5">
-            <button type="button" class="comment-form__send-btn comment-form__send-btn--active" id="add-comment">add Comment</button>
+            <input required type="text" class="comment-form__textfield" name="comment-text" maxlength="2000"
+            placeholder="put your comment here" cols="40" rows="5">
+            <button type="button" class="comment-form__send-btn comment-form__send-btn--active" id="add-comment">
+              add Comment
+            </button>
             <button type="button" class="comment-form__send-btn" id="add-subcomment">add Sub Comment</button>
           </section>
         </form>
@@ -232,15 +282,18 @@
         <hr class="regular-red-underscore">
       <section class="contacts__wrapper">
         <form name="contact-form" class="cotact-form">
-          <input required class="cotact-form__input" type="text" name="sender-name" maxlength="50" placeholder="Name">
-          <input required class="cotact-form__input" type="email" name="sender-email" maxlength="100" placeholder="Your Mail">
-          <textarea required class="cotact-form__input cotact-form__input-text" name="sender-text" maxlength="500" placeholder="Type your message" cols="40" rows="5"></textarea>
+          <input required id="addressee-name" class="cotact-form__input" type="text" name="sender-name"
+          maxlength="50" placeholder="Name">
+          <input required class="cotact-form__input" type="email" name="sender-email" maxlength="100"
+          placeholder="Your Mail">
+          <textarea required class="cotact-form__input cotact-form__input-text" name="sender-text"
+
+          maxlength="500" placeholder="Type your message" cols="40" rows="5"></textarea>
           <button type="submit" class="cotact-form__send-btn" id="send-message">SEND MESSAGE</button>
         </form>
         <address class="contacts__info">
           <span class="contacts__info-title">CONTACT INFO</span>
-          <span class="contacts__info-address">Jalalabad 24 / A, Ambaarkhana, Sylhet,
-  Bangladesh</span>
+          <span class="contacts__info-address">Jalalabad 24 / A, Ambaarkhana, Sylhet, Bangladesh</span>
           <a href="mailto:redwan@deviserweb.com" class="contacts__info-email">redwan@deviserweb.com</a>
           <a href="tel:(+88)017-617-46373" class="contacts__info-telr">(+88) 017 617 46373</a>
         </address>

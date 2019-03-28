@@ -1,0 +1,16 @@
+.footer-field {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  background-color: #313030;
+  height: 5rem;
+}
+
+.footer-field__copyright {
+  color: #b8b8b8;
+}
+
+.footer-field__social-panel > a {
+  margin-right: 1rem;
+}
