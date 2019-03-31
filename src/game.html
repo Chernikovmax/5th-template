@@ -33,8 +33,17 @@
     </button>
   </header>
   <main class="main-field">
-
-    <p class="gaming-message">
+    <section class="game-mods">
+      <span>
+        <input type="radio" name="game-mod" id="ai-mod">
+        <label class="game-mods__item" for="ai-mod">AI GAME MOD</label>
+      </span>
+      <span>
+        <input type="radio" name="game-mod" id="two-players-mod">
+        <label class="game-mods__item" for="two-players-mod">2 PLAYERS GAME MOD</label>
+      </span>
+    </section>
+    <p id="event-message" class="gaming-message">
       <svg class="symbol" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 80 80">
         <g>
           <polygon
@@ -46,6 +55,9 @@
       PLAYER'S MOVE
     </p>
     <section class="game-field">
+      <p class="game-field__inscription">
+        CHOOSE YOUR GAME'S MODE
+      </p>
     </section>
     <button class="clear-field">Clear game</button>
 

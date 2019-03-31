@@ -1,13 +1,25 @@
 .main-field {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: calc(100vh - 9rem);
 }
 
+.game-mods {
+  margin: 1.2rem 0;
+}
+
+.game-mods__item {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.game-mods >span:last-of-type {
+  margin-left: 2rem;
+}
+
 .gaming-message {
-  display: flex;
+  display: none;
   align-items: center;
   font-size: 2rem;
   height: 2.2rem;
@@ -16,6 +28,9 @@
 }
 .gaming-message > svg {
   margin-right: 0.5rem;
+}
+.gaming-message--active {
+  display: flex;
 }
 
 .game-field {
@@ -27,6 +42,15 @@
   border: 5px solid rgb(170, 96, 10);
   width: 450px;
   height: 450px;
+}
+
+.game-field__inscription {
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
 }
 
 .game-field__cell {
@@ -52,6 +76,7 @@
 }
 
 .clear-field {
+  display: none;
   margin-top: 2rem;
   font-size: 1.2rem;
   color: #fff;
@@ -60,6 +85,10 @@
   background-color: #ff3f40;
   padding: 5px 8px;
   cursor: pointer;
+}
+
+.clear-field--active {
+  display: block;
 }
 
 .clear-field:hover {
