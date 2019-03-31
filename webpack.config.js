@@ -57,7 +57,7 @@ module.exports = {
   entry: {
     app: './src/scripts/index.js',
     gallery: './src/scripts/gallery/gallery.js',
-    game: './src/scripts/game/game.js',
+    game: './src/scripts/game/index.js',
   },
   output: {
     path: path.resolve('dist'),

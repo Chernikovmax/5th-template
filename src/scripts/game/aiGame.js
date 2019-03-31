@@ -7,38 +7,44 @@ import {GameBase, DEFAULT_BOARD, FIRST_PLAYER, SECOND_PLAYER, CROSS_ICON, CIRCLE
 export class AIGameMod extends GameBase {
   constructor() {
     super();
+    this._cellListener();
   }
 
   game_3x3_withAi(event) {
-
     if (event.target.className !== 'game-field__cell' && event.target.innerHTML !== "") {
       return;
     }
       let clickedCellIndex = parseInt(event.target.getAttribute('data-value'), 10);
-      this.board[clickedCellIndex] = FIRST_PLAYER;
-      event.target.innerHTML = CROSS_ICON;
-      let aiCell = minimax(SECOND_PLAYER).index;
-      if (aiCell === undefined) {
+      const moveP = (i) => this.movePlayer(i);
+      moveP(clickedCellIndex);
+      // console.log('1');
+      // this.board[clickedCellIndex] = FIRST_PLAYER;
+      // event.target.innerHTML = CROSS_ICON;
+      let aiCell = () => this.minimax(SECOND_PLAYER);
+      if (aiCell.index === undefined) {
         this.stop();
         return;
       }
-      cells[aiCell].innerHTML = this.movingPlayer;
-      this.board[aiCell] = SECOND_PLAYER;
-      let huCell = minimax(FIRST_PLAYER).index;
-      if (huCell === undefined) {
+      moveP(aiCell);
+      // ()=>this.movePlayer(aiCell);
+      // cells[aiCell].innerHTML = this.movingPlayer;
+      // this.board[aiCell] = SECOND_PLAYER;
+      let huCell = () => this.minimax(FIRST_PLAYER);
+      if (huCell.index === undefined) {
         this.gameMessage.innerHTML = 'GAME OVER';
         // gameField.removeEventListener('click', game_3x3_withAi);
         return;
       }
   }
 
-  minimax(player) {
-    const availCells = getEmptyCells();
+  minimax() {
+      console.log('2');
+    const availCells = this.getEmptyCells();
 
-    if (winning(FIRST_PLAYER)) {
+    if (this.didFinished()) {
     return {score:-10};
     }
-      else if (winning(SECOND_PLAYER)){
+      else if (this.didFinished()){
         return {score:10};
       }
         else if (availCells.length === 0){
@@ -54,11 +60,11 @@ export class AIGameMod extends GameBase {
       this.board[availCells[i]] = this.movingPlayer;
 
       if ( this.movingPlayer === SECOND_PLAYER) {
-        const result = minimax(FIRST_PLAYER);
+        const result = this.minimax(FIRST_PLAYER);
         move.score = result.score;
       }
         else {
-          const result = minimax(SECOND_PLAYER);
+          const result = this.minimax(SECOND_PLAYER);
           move.score = result.score;
         }
 
@@ -84,6 +90,10 @@ export class AIGameMod extends GameBase {
       }
     }
     return moves[bestMove];
+  }
+
+  _cellListener() {
+    this.renderingArea.addEventListener('click', this.game_3x3_withAi.bind(this));
   }
 }
 

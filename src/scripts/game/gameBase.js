@@ -30,9 +30,6 @@ export class GameBase {
   constructor() {
     this.board = [...DEFAULT_BOARD];
     this.movingPlayer = FIRST_PLAYER;
-    this.renderingArea = document.querySelector('.game-field');
-    this.gameMessage = document.querySelector('#event-message');
-    this.clearGameBtn = document.querySelector('.clear-field');
     this.start();
   }
 
@@ -47,14 +44,18 @@ export class GameBase {
     }
   }
 
-  movePlayer(player, cellNumber) {
+  movePlayer(cellNumber) {
+    console.log('movePlayer was runned');
     const cell = document.querySelector(`[data-value="${cellNumber}"]`);
-    cell.innerHTML = this.movingPlayer;
+    cell.innerHTML = this.movingPlayer === FIRST_PLAYER ? CROSS_ICON : CIRCLE_ICON;
+    console.log(cell.innerHTML);
     this.board[cellNumber] = this.movingPlayer;
-    this.movingPlayer = (this.movingPlayer === FIRST_PLAYER) ? CIRCLE_ICON : CROSS_ICON;
-    return {
-      didPlayerWon: this.didFinished(),
-    }
+    this.movingPlayer = (this.movingPlayer === FIRST_PLAYER) ? SECOND_PLAYER : FIRST_PLAYER;
+    console.log('movePlayer was finished');
+    return this.didFinished();
+    // return {
+    //   didPlayerWon: this.didFinished(),
+    // }
   }
 
   getEmptyCells() {
@@ -74,6 +75,9 @@ export class GameBase {
   }
 
   start() {
+    this.renderingArea = document.querySelector('.game-field');
+    this.gameMessage = document.querySelector('#event-message');
+    this.clearGameBtn = document.querySelector('.clear-field');
     this.renderingArea.innerHTML = '';
     this.gameMessage.classList.add('gaming-message--active');
     this.clearGameBtn.classList.add('clear-field--active');
@@ -83,24 +87,21 @@ export class GameBase {
       cell.className = 'game-field__cell';
       this.renderingArea.appendChild(cell);
     }
-    this.clearGameBtn.addEventListener('click', this.stop);
+    this.cellsOnBoard = document.querySelectorAll('.game-field__cell');
+    const event = () => this.stop();
+    this.clearGameBtn.addEventListener('click', event);
     return;
     // throw new Error('You need to implement method "start" first');
   }
 
   stop() {
-    console.log('stop() is activated');
-    let cells = document.querySelectorAll('.game-field__cell');
-    for (let i = 0; i < cells.length; i++) {
-      cells[i].innerHTML = '';
+    for (let i = 0; i < this.cellsOnBoard.length; i++) {
+      this.cellsOnBoard[i].innerHTML = '';
     }
     this.board = [...DEFAULT_BOARD];
     // this.clearGameBtn.removeEventListener('click', this.stop);
-    console.log(this.clearGameBtn);
     // this.gameMessage.classList.remove('gaming-board--active');
     // this.clearGameBtn.classList.remove('clear-field--active');
-    console.log('stop() is finished');
-    console.log(this.clearGameBtn);
     return;
   }
   //

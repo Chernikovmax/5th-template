@@ -8,7 +8,7 @@ const gameMods = document.querySelector('.game-mods');
 // const gameMessage = document.querySelector('.gaming-message');
 // const clearGameBtn = document.querySelector('.clear-field');
 let currentGame;
-let cellsOnBoard;
+// let cellsOnBoard;
 
 
 gameMods.addEventListener('click', newGame);
@@ -17,12 +17,12 @@ function newGame(event) {
 
   if (event.target.id === 'ai-mod') {
     currentGame = new AIGameMod();
-    global.currentGame = currentGame;
   } else
   if (event.target.id === 'two-players-mod') {
     currentGame = new TwoPlayersGame();
   }
-  cellsOnBoard = document.querySelectorAll('.game-field__cell');
+  global.currentGame = currentGame;
+  // cellsOnBoard = document.querySelectorAll('.game-field__cell');
   return;
   // return cellsOnBoard.addEventListener('click', currentGame.);
 }
