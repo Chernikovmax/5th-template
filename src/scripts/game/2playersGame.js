@@ -3,7 +3,36 @@ import {GameBase, DEFAULT_BOARD, FIRST_PLAYER, SECOND_PLAYER, CROSS_ICON, CIRCLE
 export class TwoPlayersGame extends GameBase {
   constructor() {
     super();
+    this.start();
+    this._cellListener();
   }
+
+  game_3x3_2players(event) {
+    if (event.target.className !== 'game-field__cell' && event.target.innerHTML !== "") {
+      return;
+    }
+    let clickedCellIndex = parseInt(event.target.getAttribute('data-value'), 10);
+    // (clickedCellIndex) => this.movePlayer(clickedCellIndex)();
+    const moveP = (i) => this.movePlayer(i);
+    moveP(clickedCellIndex);
+    const isPlayerWon = (board, player) => this.didFinished(board, player);
+    isPlayerWon(this.board, this.movingPlayer);
+    this.changePlayer.bind(this);
+    this.changePlayer();
+    //
+    // const emptyCellsOnBoard = (board) => this.getEmptyCells(board);
+    // console.log(emptyCellsOnBoard(this.board));
+    //
+    // if (emptyCellsOnBoard(this.board).length === 0) {
+    //   this.gameMessage.innerHTML = 'GAME OVER! GAMEBOARD IS FILLED OUT!';
+    //   return;
+    // }
+  }
+
+  _cellListener() {
+    this.renderingArea.addEventListener('click', this.game_3x3_2players.bind(this));
+  }
+
 }
 
 // const gamingMessage = document.querySelector('.gaming-message');

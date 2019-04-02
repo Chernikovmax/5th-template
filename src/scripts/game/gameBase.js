@@ -1,6 +1,6 @@
-const DEFAULT_BOARD = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-export const FIRST_PLAYER = -1;
-export const SECOND_PLAYER = 1;
+const DEFAULT_BOARD = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+export const FIRST_PLAYER = 'cross';
+export const SECOND_PLAYER = 'circle';
 
 export const CROSS_ICON =  `<svg class="symbol" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 80 80">
             <g>
@@ -30,7 +30,7 @@ export class GameBase {
   constructor() {
     this.board = [...DEFAULT_BOARD];
     this.movingPlayer = FIRST_PLAYER;
-    this.start();
+    this.winningCombinations = [];
   }
 
   renderBoard(selector) {
@@ -45,33 +45,62 @@ export class GameBase {
   }
 
   movePlayer(cellNumber) {
-    console.log('movePlayer was runned');
     const cell = document.querySelector(`[data-value="${cellNumber}"]`);
     cell.innerHTML = this.movingPlayer === FIRST_PLAYER ? CROSS_ICON : CIRCLE_ICON;
-    console.log(cell.innerHTML);
     this.board[cellNumber] = this.movingPlayer;
-    this.movingPlayer = (this.movingPlayer === FIRST_PLAYER) ? SECOND_PLAYER : FIRST_PLAYER;
-    console.log('movePlayer was finished');
-    return this.didFinished();
-    // return {
-    //   didPlayerWon: this.didFinished(),
-    // }
+    return;
   }
 
-  getEmptyCells() {
-    this.board.filter(cell => cell === 0);
+  getEmptyCells(board) {
+    board.filter(cell => cell !== FIRST_PLAYER || SECOND_PLAYER);
   }
 
-  didFinished() {
-    let player = (this.movingPlayer === FIRST_PLAYER) ? CIRCLE_ICON : CROSS_ICON;
-    return (this.board[0] === player && this.board[1] === player && this.board[2] === player) ||
-      (this.board[3] === player && this.board[4] === player && this.board[5] === player) ||
-      (this.board[6] === player && this.board[7] === player && this.board[8] === player) ||
-      (this.board[0] === player && this.board[3] === player && this.board[6] === player) ||
-      (this.board[1] === player && this.board[4] === player && this.board[7] === player) ||
-      (this.board[2] === player && this.board[5] === player && this.board[8] === player) ||
-      (this.board[0] === player && this.board[4] === player && this.board[8] === player) ||
-      (this.board[2] === player && this.board[4] === player && this.board[6] === player);
+  changePlayer() {
+    if (this.movingPlayer === FIRST_PLAYER) {
+      return this.movingPlayer = SECOND_PLAYER;
+    } else {
+      return this.movingPlayer = FIRST_PLAYER;
+    }
+  }
+
+  didFinished(board, player) {
+
+    switch (true) {
+      case (board[0] === player && board[1] === player && board[2] === player):
+        this.winningCombinations.push(0,1,2);
+        break;
+      case (board[3] === player && board[4] === player && board[5] === player):
+        this.winningCombinations.push(3,4,5);
+        break;
+      case (board[6] === player && board[7] === player && board[8] === player):
+        this.winningCombinations.push(6,7,8);
+        break;
+      case (board[0] === player && board[3] === player && board[6] === player):
+        this.winningCombinations.push(0,3,6);
+        break;
+      case (board[1] === player && board[4] === player && board[7] === player):
+        this.winningCombinations.push(1,4,7);
+        break;
+      case (board[2] === player && board[5] === player && board[8] === player):
+        this.winningCombinations.push(2,5,8);
+        break;
+      case (board[0] === player && board[4] === player && board[8] === player):
+        this.winningCombinations.push(0,4,8);
+        break;
+      case (board[2] === player && board[4] === player && board[6] === player):
+        this.winningCombinations.push(2,4,6);
+        break;
+    }
+
+    if (this.winningCombinations.length > 0) {
+      while (this.winningCombinations.length > 0) {
+        this.cellsOnBoard[this.winningCombinations.pop()].classList.add('victory-cell');
+      }
+      this.gameMessage.innerHTML = `GAME OVER! ${(this.movingPlayer === FIRST_PLAYER)? 'FIRST PLAYER WIN!' : 'SECOND PLAYER WIN!'}`;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   start() {
@@ -91,53 +120,15 @@ export class GameBase {
     const event = () => this.stop();
     this.clearGameBtn.addEventListener('click', event);
     return;
-    // throw new Error('You need to implement method "start" first');
   }
 
   stop() {
     for (let i = 0; i < this.cellsOnBoard.length; i++) {
+      this.cellsOnBoard[i].classList.remove('victory-cell');
       this.cellsOnBoard[i].innerHTML = '';
     }
     this.board = [...DEFAULT_BOARD];
-    // this.clearGameBtn.removeEventListener('click', this.stop);
-    // this.gameMessage.classList.remove('gaming-board--active');
-    // this.clearGameBtn.classList.remove('clear-field--active');
+    this.movingPlayer = FIRST_PLAYER;
     return;
   }
-  //
-  // start(renderingArea, gameMessage, clearGameBtn) {
-  //   this.renderingArea = renderingArea;
-  //   this.gameMessage = gameMessage;
-  //   this.renderingArea.innerHTML = '';
-  //   gameMessage.classList.add('gaming-board--active');
-  //   clearGameBtn.classList.add('clear-field--active');
-  //   for (let i = 0; i < this.board.length; i++) {
-  //     let cell = document.createElement('section');
-  //     cell.setAttribute('data-value', `${i}`);
-  //     cell.className = 'game-field__cell';
-  //     renderingArea.appendChild(cell);
-  //   }
-  //   clearGameBtn.addEventListener('click', currentGame.stop());
-  //   return;
-  //   // throw new Error('You need to implement method "start" first');
-  // }
-  //
-  // stop() {
-  //   console.log(this.renderingArea);
-  //   let cells = this.renderingArea.querySelectorAll('.game-field__cell');
-  //   for (let i = 0; i < cells.length; i++) {
-  //     cells[i].innerHTML = '';
-  //   }
-  //   let inscription = document.createElement('section');
-  //   inscription.innerHTML = "CHOOSE YOUR GAME'S MODE";
-  //   inscription.className = 'game-field__inscription';
-  //   this.renderingArea.appendChild(inscription);
-  //   this.board = [...DEFAULT_BOARD];
-  //   delete this.renderingArea;
-  //   delete this.gameMessage;
-  //   clearGameBtn.removeEventListener('click', currentGame.stop());
-  //   gameMessage.classList.remove('gaming-board--active');
-  //   clearGameBtn.classList.remove('clear-field--active');
-  //   return;
-  // }
 }
