@@ -4,11 +4,7 @@ import {AIGameMod} from './aiGame.js';
 import {TwoPlayersGame} from './2playersGame.js';
 
 const gameMods = document.querySelector('.game-mods');
-// const gameField = document.querySelector('.game-field');
-// const gameMessage = document.querySelector('.gaming-message');
-// const clearGameBtn = document.querySelector('.clear-field');
 let currentGame;
-// let cellsOnBoard;
 
 
 gameMods.addEventListener('click', newGame);
@@ -22,7 +18,5 @@ function newGame(event) {
     currentGame = new TwoPlayersGame();
   }
   global.currentGame = currentGame;
-  // cellsOnBoard = document.querySelectorAll('.game-field__cell');
   return;
-  // return cellsOnBoard.addEventListener('click', currentGame.);
 }

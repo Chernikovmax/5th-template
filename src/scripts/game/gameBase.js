@@ -48,17 +48,19 @@ export class GameBase {
     const cell = document.querySelector(`[data-value="${cellNumber}"]`);
     cell.innerHTML = this.movingPlayer === FIRST_PLAYER ? CROSS_ICON : CIRCLE_ICON;
     this.board[cellNumber] = this.movingPlayer;
+    this.gameMessage.innerHTML =  `${(this.movingPlayer === FIRST_PLAYER)? CIRCLE_ICON : CROSS_ICON} PLAYER'S MOVE`;
     return;
   }
 
   getEmptyCells(board) {
-    board.filter(cell => cell !== FIRST_PLAYER || SECOND_PLAYER);
+    return board.filter(cell => cell !== FIRST_PLAYER && cell !== SECOND_PLAYER);
   }
 
   changePlayer() {
     if (this.movingPlayer === FIRST_PLAYER) {
       return this.movingPlayer = SECOND_PLAYER;
     } else {
+
       return this.movingPlayer = FIRST_PLAYER;
     }
   }
@@ -96,7 +98,13 @@ export class GameBase {
       while (this.winningCombinations.length > 0) {
         this.cellsOnBoard[this.winningCombinations.pop()].classList.add('victory-cell');
       }
-      this.gameMessage.innerHTML = `GAME OVER! ${(this.movingPlayer === FIRST_PLAYER)? 'FIRST PLAYER WIN!' : 'SECOND PLAYER WIN!'}`;
+
+      let restCells = this.getEmptyCells(board);
+      for (let i = 0; i < restCells.length; i++) {
+        this.cellsOnBoard[restCells[i]].innerHTML = 'THE CELL IS FILLED';
+      }
+
+      this.gameMessage.innerHTML = `GAME OVER: ${(this.movingPlayer === FIRST_PLAYER)? 'FIRST PLAYER WIN!' : 'SECOND PLAYER WIN!'}`;
       return true;
     } else {
       return false;
@@ -129,6 +137,7 @@ export class GameBase {
     }
     this.board = [...DEFAULT_BOARD];
     this.movingPlayer = FIRST_PLAYER;
+    this.gameMessage.innerHTML = `${CROSS_ICON} PLAYER'S MOVE`;
     return;
   }
 }
