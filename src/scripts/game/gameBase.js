@@ -48,6 +48,10 @@ export class GameBase {
     const cell = document.querySelector(`[data-value="${cellNumber}"]`);
     cell.innerHTML = this.movingPlayer === FIRST_PLAYER ? CROSS_ICON : CIRCLE_ICON;
     this.board[cellNumber] = this.movingPlayer;
+    const emptyCellsOnBoard = (board) => this.getEmptyCells(board);
+    if (emptyCellsOnBoard(this.board).length === 0) {
+      return this.gameMessage.innerHTML = 'GAME OVER! GAMEBOARD IS FILLED OUT!';
+    }
     this.gameMessage.innerHTML =  `${(this.movingPlayer === FIRST_PLAYER)? CIRCLE_ICON : CROSS_ICON} PLAYER'S MOVE`;
     return;
   }
@@ -120,8 +124,8 @@ export class GameBase {
       this.renderingArea.appendChild(cell);
     }
     this.cellsOnBoard = document.querySelectorAll('.game-field__cell');
-    const event = () => this.stop();
-    this.clearGameBtn.addEventListener('click', event);
+    // const event = () => this.stop();
+    // this.clearGameBtn.addEventListener('click', () => this.stop());
     return;
   }
 

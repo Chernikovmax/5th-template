@@ -5,6 +5,7 @@ export class TwoPlayersGame extends GameBase {
     super();
     this.start();
     this._cellListener();
+    this.gameListener = true;
     this.gameMod;
   }
 
@@ -21,21 +22,23 @@ export class TwoPlayersGame extends GameBase {
     this.didFinished(this.board, this.movingPlayer);
     if (this.didFinished(this.board, this.movingPlayer)) {
       this.renderingArea.removeEventListener('click', this.gameMod);
+      this.gameListener = false;
     };
 
     this.changePlayer.bind(this);
     this.changePlayer();
-
-    const emptyCellsOnBoard = (board) => this.getEmptyCells(board);
-    if (emptyCellsOnBoard(this.board).length === 0) {
-      this.gameMessage.innerHTML = 'GAME OVER! GAMEBOARD IS FILLED OUT!';
-      return;
-    }
   }
 
   _cellListener() {
     this.gameMod = () => this.game_3x3_2players(event);
     this.renderingArea.addEventListener('click', this.gameMod);
+    this.clearGameBtn.addEventListener('click', () => {
+      this.stop();
+      if (!this.gameListener) {
+        this.renderingArea.addEventListener('click', this.gameMod);
+        this.gameListener = true;
+      }
+    });
   }
 
 }

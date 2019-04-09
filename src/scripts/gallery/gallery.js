@@ -1,4 +1,4 @@
-import '../../styles/gallery/gallery.css';
+import '../../styles/gallery/index.css';
 
 import '../header-menu.js';
 

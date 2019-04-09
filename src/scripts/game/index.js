@@ -1,4 +1,4 @@
-import '../../styles/game/game.css';
+import '../../styles/game/index.css';
 import '../header-menu.js';
 import {AIGameMod} from './aiGame.js';
 import {TwoPlayersGame} from './2playersGame.js';
