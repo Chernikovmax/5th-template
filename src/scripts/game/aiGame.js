@@ -110,7 +110,7 @@ export class AIGameMod extends GameBase {
     if (!this.didFinished(board, player)) {
       return;
     }
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) {
       this.cellsOnBoard[this.winningCombinations.pop()].classList.add('victory-cell');
     }
     this.renderingArea.removeEventListener('click', this.gameMod);
