@@ -99,11 +99,6 @@ export class GameBase {
         this.cellsOnBoard[this.winningCombinations.pop()].classList.add('victory-cell');
       }
 
-      let restCells = this.getEmptyCells(board);
-      for (let i = 0; i < restCells.length; i++) {
-        this.cellsOnBoard[restCells[i]].innerHTML = 'THE CELL IS FILLED';
-      }
-
       this.gameMessage.innerHTML = `GAME OVER: ${(this.movingPlayer === FIRST_PLAYER)? 'FIRST PLAYER WIN!' : 'SECOND PLAYER WIN!'}`;
       return true;
     } else {

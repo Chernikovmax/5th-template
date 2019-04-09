@@ -5,6 +5,7 @@ export class TwoPlayersGame extends GameBase {
     super();
     this.start();
     this._cellListener();
+    this.gameMod;
   }
 
   game_3x3_2players(event) {
@@ -18,6 +19,9 @@ export class TwoPlayersGame extends GameBase {
 
     this.didFinished.bind(this);
     this.didFinished(this.board, this.movingPlayer);
+    if (this.didFinished(this.board, this.movingPlayer)) {
+      this.renderingArea.removeEventListener('click', this.gameMod);
+    };
 
     this.changePlayer.bind(this);
     this.changePlayer();
@@ -30,7 +34,8 @@ export class TwoPlayersGame extends GameBase {
   }
 
   _cellListener() {
-    this.renderingArea.addEventListener('click', this.game_3x3_2players.bind(this));
+    this.gameMod = () => this.game_3x3_2players(event);
+    this.renderingArea.addEventListener('click', this.gameMod);
   }
 
 }
