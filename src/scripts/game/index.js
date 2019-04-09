@@ -5,7 +5,7 @@ import {TwoPlayersGame} from './2playersGame.js';
 
 const gameMods = document.querySelector('.game-mods');
 let currentGame;
-
+global.currentGame = currentGame;
 
 gameMods.addEventListener('click', newGame);
 

@@ -46,7 +46,7 @@ export class GameBase {
 
   movePlayer(cellNumber) {
     const cell = document.querySelector(`[data-value="${cellNumber}"]`);
-    cell.innerHTML = this.movingPlayer === FIRST_PLAYER ? CROSS_ICON : CIRCLE_ICON;
+    cell.innerHTML = (this.movingPlayer === FIRST_PLAYER) ? CROSS_ICON : CIRCLE_ICON;
     this.board[cellNumber] = this.movingPlayer;
     const emptyCellsOnBoard = (board) => this.getEmptyCells(board);
     if (emptyCellsOnBoard(this.board).length === 0) {
@@ -74,40 +74,30 @@ export class GameBase {
     switch (true) {
       case (board[0] === player && board[1] === player && board[2] === player):
         this.winningCombinations.push(0,1,2);
-        break;
+        return true;
       case (board[3] === player && board[4] === player && board[5] === player):
         this.winningCombinations.push(3,4,5);
-        break;
+        return true;
       case (board[6] === player && board[7] === player && board[8] === player):
         this.winningCombinations.push(6,7,8);
-        break;
+        return true;
       case (board[0] === player && board[3] === player && board[6] === player):
         this.winningCombinations.push(0,3,6);
-        break;
+        return true;
       case (board[1] === player && board[4] === player && board[7] === player):
         this.winningCombinations.push(1,4,7);
-        break;
+        return true;
       case (board[2] === player && board[5] === player && board[8] === player):
         this.winningCombinations.push(2,5,8);
-        break;
+        return true;
       case (board[0] === player && board[4] === player && board[8] === player):
         this.winningCombinations.push(0,4,8);
-        break;
+        return true;
       case (board[2] === player && board[4] === player && board[6] === player):
         this.winningCombinations.push(2,4,6);
-        break;
+        return true;
     }
-
-    if (this.winningCombinations.length > 0) {
-      while (this.winningCombinations.length > 0) {
-        this.cellsOnBoard[this.winningCombinations.pop()].classList.add('victory-cell');
-      }
-
-      this.gameMessage.innerHTML = `GAME OVER: ${(this.movingPlayer === FIRST_PLAYER)? 'FIRST PLAYER WIN!' : 'SECOND PLAYER WIN!'}`;
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
 
   start() {
@@ -124,8 +114,6 @@ export class GameBase {
       this.renderingArea.appendChild(cell);
     }
     this.cellsOnBoard = document.querySelectorAll('.game-field__cell');
-    // const event = () => this.stop();
-    // this.clearGameBtn.addEventListener('click', () => this.stop());
     return;
   }
 
@@ -136,6 +124,7 @@ export class GameBase {
     }
     this.board = [...DEFAULT_BOARD];
     this.movingPlayer = FIRST_PLAYER;
+    this.winningCombinations = [];
     this.gameMessage.innerHTML = `${CROSS_ICON} PLAYER'S MOVE`;
     return;
   }

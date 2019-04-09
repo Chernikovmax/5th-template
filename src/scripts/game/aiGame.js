@@ -5,6 +5,8 @@ export class AIGameMod extends GameBase {
     super();
     this.start();
     this._cellListener();
+    this.gameListener = true;
+    this.gameMod;
   }
 
   game_3x3_withAi(event) {
@@ -14,39 +16,38 @@ export class AIGameMod extends GameBase {
       let clickedCellIndex = parseInt(event.target.getAttribute('data-value'), 10);
       const moveP = (i) => this.movePlayer(i);
       moveP(clickedCellIndex);
-      // if (this.didFinished(this.board, FIRST_PLAYER) === true) {
-      //   alert('FINITO! HUMANWIN!')
+
+      this._isWinner(this.board, FIRST_PLAYER);
+
+      this.changePlayer.bind(this);
+      this.changePlayer();
+
+      // this.didFinished.bind(this);
+      // this.didFinished(this.board, this.movingPlayer, undefined);
+      // if (this.didFinished(this.board, this.movingPlayer, undefined)) {
+      //   this.renderingArea.removeEventListener('click', this.gameMod);
+      //   this.gameListener = false;
+      // };
+
+      let aiCell = this.minimax(this.board, SECOND_PLAYER).index;
+      // if (aiCell === undefined) {
+      //   this.gameMessage = ``
+      //   return;
       // }
-      // console.log('1');
-      // this.board[clickedCellIndex] = FIRST_PLAYER;
-      // event.target.innerHTML = CROSS_ICON;
-      let aiCell = this.minimax(this.board, SECOND_PLAYER);
-      if (aiCell.index === undefined) {
-        this.stop();
-        return;
-      }
       moveP(aiCell);
-      // if (this.didFinished(this.board, FIRST_PLAYER) === true) {
-      //   alert('FINITO! AIWIN!')
-      // }
-      // ()=>this.movePlayer(aiCell);
-      // cells[aiCell].innerHTML = this.movingPlayer;
-      // this.board[aiCell] = SECOND_PLAYER;
-      let huCell = this.minimax(FIRST_PLAYER);
-      if (huCell.index === undefined) {
-        this.gameMessage.innerHTML = 'GAME OVER';
-        // gameField.removeEventListener('click', game_3x3_withAi);
-        return;
-      }
+
+      this._isWinner(this.board, SECOND_PLAYER);
+
+      this.changePlayer();
   }
 
   minimax(newBoard, player) {
     const availCells = this.getEmptyCells(newBoard);
 
-    if (this.didFinished(newBoard, FIRST_PLAYER)) {
+    if (this.didFinished(newBoard, FIRST_PLAYER, 'forecast')) {
     return {score:-10};
     }
-      else if (this.didFinished(newBoard, SECOND_PLAYER)){
+      else if (this.didFinished(newBoard, SECOND_PLAYER, 'forecast')){
         return {score:10};
       }
         else if (availCells.length === 0){
@@ -93,8 +94,28 @@ export class AIGameMod extends GameBase {
     }
     return moves[bestMove];
   }
-
   _cellListener() {
-    this.renderingArea.addEventListener('click', this.game_3x3_withAi.bind(this));
+    this.gameMod = () => this.game_3x3_withAi(event);
+    this.renderingArea.addEventListener('click', this.gameMod);
+    this.clearGameBtn.addEventListener('click', () => {
+      this.stop();
+      if (!this.gameListener) {
+        this.renderingArea.addEventListener('click', this.gameMod);
+        this.gameListener = true;
+      }
+    });
   }
+
+  _isWinner(board, player) {
+    if (!this.didFinished(board, player)) {
+      return;
+    }
+    for (let i = 0; i < 4; i++) {
+      this.cellsOnBoard[this.winningCombinations.pop()].classList.add('victory-cell');
+    }
+    this.renderingArea.removeEventListener('click', this.gameMod);
+    this.gameListener = false;
+    this.gameMessage.innerHTML = `GAME OVER: ${(this.movingPlayer === FIRST_PLAYER) ? 'PLAYER WIN!' : 'AI PLAYER WIN!'}`;
+  }
+
 }

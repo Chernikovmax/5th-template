@@ -18,12 +18,8 @@ export class TwoPlayersGame extends GameBase {
     this.movePlayer.bind(this);
     this.movePlayer(clickedCellIndex);
 
-    this.didFinished.bind(this);
-    this.didFinished(this.board, this.movingPlayer);
-    if (this.didFinished(this.board, this.movingPlayer)) {
-      this.renderingArea.removeEventListener('click', this.gameMod);
-      this.gameListener = false;
-    };
+    this._isWinner(this.board, this.movingPlayer);
+
 
     this.changePlayer.bind(this);
     this.changePlayer();
@@ -41,4 +37,16 @@ export class TwoPlayersGame extends GameBase {
     });
   }
 
+  _isWinner(board, player) {
+    if (!this.didFinished(board, player)) {
+      return;
+    }
+
+    while (this.winningCombinations.length > 0) {
+      this.cellsOnBoard[this.winningCombinations.pop()].classList.add('victory-cell');
+    }
+    this.renderingArea.removeEventListener('click', this.gameMod);
+    this.gameListener = false;
+    this.gameMessage.innerHTML = `GAME OVER: ${(this.movingPlayer === FIRST_PLAYER) ? 'FIRST PLAYER WIN!' : 'SECOND PLAYER WIN!'}`;
+  }
 }
