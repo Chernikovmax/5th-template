@@ -2,9 +2,9 @@ import '../styles/index.css';
 
 import './header-menu.js';
 
-import './feature-products-gallery.js';
+import './home/feature-products-gallery.js';
 
-import './comments.js';
+import './home/comments.js';
 
 const slides = document.getElementsByClassName('slide');
 const dots = document.getElementsByClassName('slide-switches__dot');

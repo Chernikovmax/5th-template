@@ -1,4 +1,4 @@
-import {convertTime, validateEmail} from './utils';
+import {convertTime, validateEmail} from '../utils';
 const uuidv1 = require('uuid/v1');
 
 (function () {
