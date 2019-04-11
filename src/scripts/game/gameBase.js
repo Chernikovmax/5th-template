@@ -101,6 +101,7 @@ export class GameBase {
   }
 
   start() {
+    this.gameMods = document.querySelector('.game-mods');
     this.renderingArea = document.querySelector('.game-field');
     this.gameMessage = document.querySelector('#event-message');
     this.clearGameBtn = document.querySelector('.clear-field');

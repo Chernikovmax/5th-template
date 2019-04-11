@@ -4,41 +4,30 @@ export class AIGameMod extends GameBase {
   constructor() {
     super();
     this.start();
-    this._cellListener();
+    this._addListeners();
     this.gameListener = true;
-    this.gameMod;
+    this.currentGameMod;
   }
 
   game_3x3_withAi(event) {
     if (event.target.className !== 'game-field__cell' && event.target.innerHTML !== "") {
       return;
     }
-      let clickedCellIndex = parseInt(event.target.getAttribute('data-value'), 10);
-      const moveP = (i) => this.movePlayer(i);
-      moveP(clickedCellIndex);
+    let clickedCellIndex = parseInt(event.target.getAttribute('data-value'), 10);
+    const moveP = (i) => this.movePlayer(i);
+    moveP(clickedCellIndex);
 
-      this._isWinner(this.board, FIRST_PLAYER);
+    this._isWinner(this.board, FIRST_PLAYER);
 
-      this.changePlayer.bind(this);
-      this.changePlayer();
+    this.changePlayer.bind(this);
+    this.changePlayer();
 
-      // this.didFinished.bind(this);
-      // this.didFinished(this.board, this.movingPlayer, undefined);
-      // if (this.didFinished(this.board, this.movingPlayer, undefined)) {
-      //   this.renderingArea.removeEventListener('click', this.gameMod);
-      //   this.gameListener = false;
-      // };
+    let aiCell = this.minimax(this.board, SECOND_PLAYER).index;
+    moveP(aiCell);
 
-      let aiCell = this.minimax(this.board, SECOND_PLAYER).index;
-      // if (aiCell === undefined) {
-      //   this.gameMessage = ``
-      //   return;
-      // }
-      moveP(aiCell);
+    this._isWinner(this.board, SECOND_PLAYER);
 
-      this._isWinner(this.board, SECOND_PLAYER);
-
-      this.changePlayer();
+    this.changePlayer();
   }
 
   minimax(newBoard, player) {
@@ -94,17 +83,6 @@ export class AIGameMod extends GameBase {
     }
     return moves[bestMove];
   }
-  _cellListener() {
-    this.gameMod = () => this.game_3x3_withAi(event);
-    this.renderingArea.addEventListener('click', this.gameMod);
-    this.clearGameBtn.addEventListener('click', () => {
-      this.stop();
-      if (!this.gameListener) {
-        this.renderingArea.addEventListener('click', this.gameMod);
-        this.gameListener = true;
-      }
-    });
-  }
 
   _isWinner(board, player) {
     if (!this.didFinished(board, player)) {
@@ -113,9 +91,26 @@ export class AIGameMod extends GameBase {
     for (let i = 0; i < 3; i++) {
       this.cellsOnBoard[this.winningCombinations.pop()].classList.add('victory-cell');
     }
-    this.renderingArea.removeEventListener('click', this.gameMod);
+    this.renderingArea.removeEventListener('click', this.currentGameMod);
     this.gameListener = false;
     this.gameMessage.innerHTML = `GAME OVER: ${(this.movingPlayer === FIRST_PLAYER) ? 'PLAYER WIN!' : 'AI PLAYER WIN!'}`;
   }
 
+  _addListeners() {
+    this.currentGameMod = () => this.game_3x3_withAi(event);
+    this.renderingArea.addEventListener('click', this.currentGameMod);
+    this.clearGameBtn.addEventListener('click', () => {
+      this.stop();
+      if (!this.gameListener) {
+        this.renderingArea.addEventListener('click', this.currentGameMod);
+        this.gameListener = true;
+      }
+    }, {once: true});
+    this.gameMods.addEventListener('mousedown', _deleteCurrentInstance, {once: true});
+  }
+
+  _deleteCurrentInstance() {
+    this.stop();
+    this.renderingArea.removeEventListener('click', this.currentGameMod);
+  }
 }

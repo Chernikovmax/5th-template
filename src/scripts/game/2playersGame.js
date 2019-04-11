@@ -4,7 +4,7 @@ export class TwoPlayersGame extends GameBase {
   constructor() {
     super();
     this.start();
-    this._cellListener();
+    this._addListeners();
     this.gameListener = true;
     this.gameMod;
   }
@@ -25,7 +25,7 @@ export class TwoPlayersGame extends GameBase {
     this.changePlayer();
   }
 
-  _cellListener() {
+  _addListeners() {
     this.gameMod = () => this.game_3x3_2players(event);
     this.renderingArea.addEventListener('click', this.gameMod);
     this.clearGameBtn.addEventListener('click', () => {
@@ -34,7 +34,8 @@ export class TwoPlayersGame extends GameBase {
         this.renderingArea.addEventListener('click', this.gameMod);
         this.gameListener = true;
       }
-    });
+    }, {once: true});
+    this.gameMods.addEventListener('mousedown', _deleteCurrentInstance, {once: true});
   }
 
   _isWinner(board, player) {
@@ -48,5 +49,9 @@ export class TwoPlayersGame extends GameBase {
     this.renderingArea.removeEventListener('click', this.gameMod);
     this.gameListener = false;
     this.gameMessage.innerHTML = `GAME OVER: ${(this.movingPlayer === FIRST_PLAYER) ? 'FIRST PLAYER WIN!' : 'SECOND PLAYER WIN!'}`;
+  }
+  _deleteCurrentInstance() {
+    this.stop();
+    this.renderingArea.removeEventListener('click', this.currentGameMod);
   }
 }
