@@ -52,7 +52,7 @@ export class GameBase {
     if (emptyCellsOnBoard(this.board).length === 0) {
       return this.gameMessage.innerHTML = 'GAME OVER! GAMEBOARD IS FILLED OUT!';
     }
-    this.gameMessage.innerHTML =  `${(this.movingPlayer === FIRST_PLAYER)? CIRCLE_ICON : CROSS_ICON} PLAYER'S MOVE`;
+    // this.gameMessage.innerHTML =  `${(this.movingPlayer === FIRST_PLAYER)? CIRCLE_ICON : CROSS_ICON} PLAYER'S MOVE`;
     return;
   }
 

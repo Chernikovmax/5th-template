@@ -15,27 +15,14 @@ export class TwoPlayersGame extends GameBase {
     }
     let clickedCellIndex = parseInt(event.target.getAttribute('data-value'), 10);
 
-    this.movePlayer.bind(this);
-    this.movePlayer(clickedCellIndex);
+    // this.movePlayer.bind(this);
+    this._playersMove(clickedCellIndex);
 
     this._isWinner(this.board, this.movingPlayer);
 
 
     this.changePlayer.bind(this);
     this.changePlayer();
-  }
-
-  _addListeners() {
-    this.gameMod = () => this.game_3x3_2players(event);
-    this.renderingArea.addEventListener('click', this.gameMod);
-    this.clearGameBtn.addEventListener('click', () => {
-      this.stop();
-      if (!this.gameListener) {
-        this.renderingArea.addEventListener('click', this.gameMod);
-        this.gameListener = true;
-      }
-    }, {once: true});
-    this.gameMods.addEventListener('mousedown', _deleteCurrentInstance, {once: true});
   }
 
   _isWinner(board, player) {
@@ -50,6 +37,25 @@ export class TwoPlayersGame extends GameBase {
     this.gameListener = false;
     this.gameMessage.innerHTML = `GAME OVER: ${(this.movingPlayer === FIRST_PLAYER) ? 'FIRST PLAYER WIN!' : 'SECOND PLAYER WIN!'}`;
   }
+
+  _playersMove(cellIndex) {
+    this.movePlayer(cellIndex);
+    return this.gameMessage.innerHTML =  `${(this.movingPlayer === FIRST_PLAYER)? CIRCLE_ICON : CROSS_ICON} PLAYER'S MOVE`;
+  }
+
+  _addListeners() {
+    this.gameMod = () => this.game_3x3_2players(event);
+    this.renderingArea.addEventListener('click', this.gameMod);
+    this.clearGameBtn.addEventListener('click', () => {
+      this.stop();
+      if (!this.gameListener) {
+        this.renderingArea.addEventListener('click', this.gameMod);
+        this.gameListener = true;
+      }
+    });
+    this.gameMods.addEventListener('mousedown', this._deleteCurrentInstance.bind(this), {once: true});
+  }
+
   _deleteCurrentInstance() {
     this.stop();
     this.renderingArea.removeEventListener('click', this.currentGameMod);

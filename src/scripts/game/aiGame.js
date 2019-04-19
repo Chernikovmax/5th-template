@@ -105,8 +105,8 @@ export class AIGameMod extends GameBase {
         this.renderingArea.addEventListener('click', this.currentGameMod);
         this.gameListener = true;
       }
-    }, {once: true});
-    this.gameMods.addEventListener('mousedown', _deleteCurrentInstance, {once: true});
+    });
+    this.gameMods.addEventListener('mousedown', this._deleteCurrentInstance.bind(this), {once: true});
   }
 
   _deleteCurrentInstance() {

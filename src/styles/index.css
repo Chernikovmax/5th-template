@@ -43,7 +43,7 @@ p {
   background-color: #ff3f40;
 }
 
-
+/* Adaptive interface */
 @media screen and (max-width: 1080px) {
   .slide__body-title {
     height: 100px;
