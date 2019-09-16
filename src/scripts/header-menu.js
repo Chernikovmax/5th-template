@@ -1,13 +1,13 @@
-const menuBtn = document.querySelector('#burger-menu');
-const menu = document.querySelector('#main-menu');
-const menuList = document.querySelector('#main-menu-list');
+const menuBtn = document.querySelector("#burger-menu");
+const menu = document.querySelector("#main-menu");
+const menuList = document.querySelector("#main-menu-list");
 let menuActive = false;
 global.menuActive = menuActive;
 
 const toggleMenu = () => {
-  document.querySelector('body').classList.toggle('body-scroll');
-  menu.classList.toggle('header-container--active');
-  menuList.classList.toggle('header-menu--active');
+  document.querySelector("body").classList.toggle("body-scroll");
+  menu.classList.toggle("header-container--active");
+  menuList.classList.toggle("header-menu--active");
   if (menuActive === false) {
     menuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 80 80" style="enable-background:new 0 0 80 80;" xml:space="preserve">
             <g>
@@ -31,4 +31,4 @@ const toggleMenu = () => {
   }
 };
 
-menuBtn.addEventListener('click', toggleMenu);
+menuBtn.addEventListener("click", toggleMenu);
